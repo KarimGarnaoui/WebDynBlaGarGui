@@ -44,6 +44,23 @@ if($db_found){
 			$log[$data['email']] =$data['pseudo'];
 		}
 
+	$sql = "SELECT * FROM utilisateur where (email='$login' AND pseudo = '$pseudo')" ;
+	$selection= mysqli_query($db_handle, $sql);
+	while($donnees=mysqli_fetch_assoc($selection)){
+			setcookie('prenom',$donnees['prenom'], 0);
+			setcookie('nom',$donnees['nom'], 0);
+			setcookie('email',$donnees['email'], 0);
+			setcookie('numero_utilisateur',$donnees['numero_utilisateur'], 0);
+			setcookie('tel',$donnees['tel'], 0);
+			setcookie('statut',$donnees['statut'], 0);
+			setcookie('diplome',$donnees['diplome'], 0);
+			setcookie('nbr_amis',$donnees['nbr_amis'], 0);
+			setcookie('pseudo',$donnees['pseudo'], 0);
+		}
+
+		
+
+
 //$log = array($emailregi=> $pseudoregi);
 	for($i=0;$i<count($log);$i++)
 	{
@@ -61,8 +78,9 @@ if($db_found){
 
 	if($connexion)
 	{
+		header('Location: Accueil.php');
 		echo"Connexion acceptee<br>";
-		header('Location: Accueil.html');
+		
 	}
 
 	else {

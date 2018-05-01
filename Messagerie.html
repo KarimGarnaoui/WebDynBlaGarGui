@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<html lang="en">
 		<head>
-			 <title>Mon Réseau</title>
+			 <title>Accueil</title>
 			 <meta charset="utf-8">
 			 <meta name="viewport" content="width=device-width, initial-scale=1">
 			 <link rel="stylesheet"
@@ -21,7 +21,7 @@
 			      		width: 20%;
 			      		float : right;
 			      	}
-			      	[id*="monreseau"] 
+			      	[id*="messagerie"] 
 			      	{ 
 			      		padding-right: 20px;
 			      		padding-left: 20px;
@@ -31,7 +31,35 @@
 			      		border-radius: 5px;
 			      		font-weight:bold;
 			      		width: 78%;
-			      		height: 700px ; 
+			      		height: 700px;
+			      		float : left;
+
+			      	}
+			      	[id*="messagePan"] 
+			      	{ 
+			      		padding-right: 20px;
+			      		padding-left: 20px;
+			      		padding-bottom: 5px;
+			      		background-color: rgb(230, 230, 230) ;
+			      		color: black;
+			      		border-radius: 10px;
+			      		width: 65%;
+			      		height: 600px ; 
+			      		font-weight:bold;
+			      		float : right;
+
+			      	}
+			      	[id*="coontactPan"] 
+			      	{ 
+			      		padding-right: 20px;
+			      		padding-left: 20px;
+			      		padding-bottom: 5px;
+			      		background-color: rgb(230, 230, 230) ;
+			      		color: black;
+			      		border-radius: 10px;
+			      		font-weight:bold;
+			      		width: 30%;
+			      		height: 600px ; 
 			      		float : left;
 
 			      	}
@@ -41,28 +69,21 @@
 			      		padding-left: 20px;
 			      		padding-bottom: 5px;
 			      		background-color: rgb(230, 230, 230) ;
-			      		border-radius: 10px;
-			      		color : black;
-			      		width: 40%;
-			      		float: left ;
+			      		color: black;
+			      		border: 1px black solid;
+			      		border-radius: 5px;
+			      		width: 90% ;
+			      		height: 50px ; 
+			      		font-weight:bold;
+			      		float : center;
 
 			      	}
+			      	
 			      	h4 
 			      	{
 					    font-weight: bold;
 					}
-					[id*="pborder"]
-					{
-						width: 70% ; 
-						float: left ; 
-					}
-					[id*="pikevent"]
-					{
-						border: 1px black solid;
-						border-radius: 5px ; 
-						width: 75px; 
-						height: 75px;
-					}
+					
     		</style>
 			 
 		</head>
@@ -73,8 +94,8 @@
 				<div class="navbar navbar-inverse">
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
-					  	<li><a href="Accueil.html">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
-					  	<li class="active"><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li class="active"><a href="Accueil.html">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
+					  	<li><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.html">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
@@ -107,18 +128,29 @@
 			    
 			    <!-- Affichage des evênements  -->
 
-			    <div id="monreseau" class="container-fluid">
-					<h3>Contacts</h3><br><br><br>
-						<div id = "contact" class="container-fluid">
-							<h4>Jimmy Neutron<br></h4>
-							<p id="pborder">
-								<span class="glyphicon glyphicon-comment"></span>&nbsp  jneutron@mail.com <br>
-								<span class="glyphicon glyphicon-phone"></span>&nbsp +33 6 24 51 65 45<br><br><br>
-							</p>
-							<p align="right"><img id="pikevent" src="jimmy.jpg" width="148" height="148" ></p>
-							
+			    <div id="messagerie" class="container-fluid">
+					<h4>Messages</h4><br>
+
+					<div id="coontactPan" class="container-fluid">
+						<h4>Contacts</h4><br>
+							<?php
+								$Login    = "root"      ; 
+						        $Pass     = ""          ;
+						        $DataBase = "tpnote2"   ;  
+						        $Serveur  = "localhost" ;
+							?>
+						<div id="contact" class="container-fluid">
+
 						</div>
-			    </div>
+					</div>
+
+					<div id="messagePan" class="container-fluid">
+						<h4>Messagerie instantannée</h4><br>
+					</div>
+
+
+				</div>
+			    
 
 
 			</div> 

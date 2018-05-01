@@ -97,10 +97,20 @@
 					    <tr>
 					    	<td><img src="pdp.jpg" class="img-circle" alt="Profil" width="80" height="80"> &nbsp&nbsp</td>
 					    	<td> 
-					    		Franklin <br> 
-					    		Roosevelt <br> 
+					    		<?php 
+					    			if(isset($_COOKIE['prenom'])) 
+									{
+							   			$prenom = $_COOKIE['prenom'];
+							   			echo "$prenom <br>" ; 
+									}
+									if(isset($_COOKIE['nom'])) 
+									{
+							   			$nom = $_COOKIE['nom'];
+							   			echo "$nom <br>" ; 
+									}
+					    		?> 
 					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Deconnexion.php"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
 					    </tr>
 					    
