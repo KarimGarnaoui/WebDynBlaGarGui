@@ -79,7 +79,7 @@
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
-					  	<li><a href="Photos.html">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
+					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form class="navbar-form navbar-right">
@@ -105,7 +105,7 @@
 									echo "<td><img src='".$pdp."' class='img-circle' alt='Profil' width='80' height='80'> &nbsp&nbsp</td><br>" ;
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
-					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
+					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
 					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
 					    </tr>

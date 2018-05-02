@@ -44,6 +44,8 @@
 			      		color : black;
 			      		width: 40%;
 			      		float: left ;
+			      		margin-left: 20px;
+			      		margin-bottom: 20px;
 
 			      	}
 			      	h4 
@@ -76,7 +78,7 @@
 					  	<li class="active"><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
-					  	<li><a href="Photos.html">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
+					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form class="navbar-form navbar-right">
@@ -102,7 +104,7 @@
 									echo "<td><img src='".$pdp."' class='img-circle' alt='Profil' width='80' height='80'> &nbsp&nbsp</td><br>" ;
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
-					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
+					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
 					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
 					    </tr>
@@ -115,15 +117,49 @@
 
 			    <div id="monreseau" class="container-fluid">
 					<h3>Contacts</h3><br><br><br>
-						<div id = "contact" class="container-fluid">
-							<h4>Jimmy Neutron<br></h4>
-							<p id="pborder">
-								<span class="glyphicon glyphicon-comment"></span>&nbsp  jneutron@mail.com <br>
-								<span class="glyphicon glyphicon-phone"></span>&nbsp +33 6 24 51 65 45<br><br><br>
-							</p>
-							<p align="right"><img id="pikevent" src="jimmy.jpg" width="148" height="148" ></p>
+					<?php 
+						// <div id = "contact" class="container-fluid">
+						// 	<h4>Jimmy Neutron<br></h4>
+						// 	<p id="pborder">
+						// 		<span class="glyphicon glyphicon-comment"></span>&nbsp  jneutron@mail.com <br>
+						// 		<span class="glyphicon glyphicon-phone"></span>&nbsp +33 6 24 51 65 45<br><br><br>
+						// 	</p>
+						// 	<p align="right"><img id="pikevent" src="jimmy.jpg" width="148" height="148" ></p>
 							
-						</div>
+						// </div>
+
+						$Connexion = new mysqli( 'localhost' , "root" , "" , "ecemplois" ) ;
+						if ($Connexion->connect_error)echo "Erreur lors de la connexion à la base de donnée" ;
+						if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
+
+						$sql = "SELECT * FROM utilisateur 
+							        		JOIN etrecontactpro 
+							        		WHERE (('$numero_utilisateur' = etrecontactpro.numero_utilisateur1 OR '$numero_utilisateur' = etrecontactpro.numero_utilisateur2) 
+							        		AND (utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur1 OR utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur2) )
+							        		GROUP BY utilisateur.numero_utilisateur";
+				        $selection = mysqli_query($Connexion,$sql);
+
+				        while($donnees =  mysqli_fetch_assoc($selection))
+				        {
+				        	if($donnees['numero_utilisateur']!=$numero_utilisateur)
+				        	{
+					        	echo "<div id = 'contact' class='container-fluid'>" ;
+					        	echo "<h4>".$donnees['prenom']." ".$donnees['nom'] ."<br></h4>" ; 
+					        	echo "<p id='pborder'>" ; 
+					        		echo "<span class='glyphicon glyphicon-comment'></span>&nbsp  ".$donnees['email']."<br>" ; 
+					        		echo "<span class='glyphicon glyphicon-phone'></span>&nbsp ".$donnees['tel']."<br><br><br>" ; 
+					        	echo "</p>" ;
+					        	$num_user_actuel = $donnees['numero_utilisateur'] ; 
+					        	$sqlPhoto = "SELECT lien FROM accessibilite WHERE (numero_utilisateur = $num_user_actuel AND pdp = 1)" ; 
+					        	$selectionPhoto = mysqli_query($Connexion,$sqlPhoto);
+					        	$donneesPhoto =  mysqli_fetch_assoc($selectionPhoto) ; 
+
+					        	echo "<p align='right'><img id='pikevent' src=".$donneesPhoto['lien']." width='148' height='148' ></p>" ; 
+					        	echo "</div>" ; 
+				        	}
+						}
+
+					?>	
 			    </div>
 
 
