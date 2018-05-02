@@ -13,7 +13,6 @@
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
-			      		padding-top: 5px;
 			      		padding-bottom: 5px;
 			      		background-color: rgb(200, 200, 200) ;
 			      		border-radius: 5px;
@@ -78,7 +77,7 @@
 					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.html">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
-					  	<li><a href="Messagerie.html">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
+					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form class="navbar-form navbar-right">
 						        <input type="search" class="input-sm form-control" placeholder="Recherche">
@@ -92,12 +91,19 @@
 					<table id="profil" align="right">
 						<tr><td colspan="2"><center><p>Utilisateur connecté</p></center></td></tr>
 					    <tr>
-					    	<td><img src="pdp.jpg" class="img-circle" alt="Profil" width="80" height="80"> &nbsp&nbsp</td>
-					    	<td> 
-					    		Franklin <br> 
-					    		Roosevelt <br> 
+					    		<?php 
+					    			$prenom = "prenom" ; 
+					    			$nom = "nom" ; 
+					    			$pdp = "" ; 
+					    			if(isset($_COOKIE['prenom'])) $prenom = $_COOKIE['prenom'];
+									if(isset($_COOKIE['nom'])) $nom = $_COOKIE['nom'];
+									if(isset($_COOKIE['pdp'])) $pdp = $_COOKIE['pdp'];
+
+									echo "<td><img src='".$pdp."' class='img-circle' alt='Profil' width='80' height='80'> &nbsp&nbsp</td><br>" ;
+									echo "<td> $prenom <br> $nom <br>" ;
+					    		?> 
 					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Deconnexion.php"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
 					    </tr>
 					    

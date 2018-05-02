@@ -46,17 +46,23 @@ if($db_found){
 
 	$sql = "SELECT * FROM utilisateur where (email='$login' AND pseudo = '$pseudo')" ;
 	$selection= mysqli_query($db_handle, $sql);
-	while($donnees=mysqli_fetch_assoc($selection)){
-			setcookie('prenom',$donnees['prenom'], 0);
-			setcookie('nom',$donnees['nom'], 0);
-			setcookie('email',$donnees['email'], 0);
-			setcookie('numero_utilisateur',$donnees['numero_utilisateur'], 0);
-			setcookie('tel',$donnees['tel'], 0);
-			setcookie('statut',$donnees['statut'], 0);
-			setcookie('diplome',$donnees['diplome'], 0);
-			setcookie('nbr_amis',$donnees['nbr_amis'], 0);
-			setcookie('pseudo',$donnees['pseudo'], 0);
-		}
+	$donnees=mysqli_fetch_assoc($selection);
+	setcookie('prenom',$donnees['prenom'], 0);
+	setcookie('nom',$donnees['nom'], 0);
+	setcookie('email',$donnees['email'], 0);
+	setcookie('numero_utilisateur',$donnees['numero_utilisateur'], 0);
+	setcookie('tel',$donnees['tel'], 0);
+	setcookie('statut',$donnees['statut'], 0);
+	setcookie('diplome',$donnees['diplome'], 0);
+	setcookie('nbr_amis',$donnees['nbr_amis'], 0);
+	setcookie('pseudo',$donnees['pseudo'], 0);
+		
+
+	if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
+	$sql = "SELECT * FROM accessibilite where (numero_utilisateur='$numero_utilisateur' AND pdp = '1')" ;
+	$selection= mysqli_query($db_handle, $sql);	
+	$donnees=mysqli_fetch_assoc($selection);
+	setcookie('pdp',$donnees['lien'], 0);
 
 		
 

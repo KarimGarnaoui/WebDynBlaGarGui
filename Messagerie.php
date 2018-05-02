@@ -13,7 +13,6 @@
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
-			      		padding-top: 5px;
 			      		padding-bottom: 5px;
 			      		background-color: rgb(200, 200, 200) ;
 			      		border-radius: 5px;
@@ -73,10 +72,15 @@
 			      		border: 1px black solid;
 			      		border-radius: 5px;
 			      		width: 90% ;
-			      		height: 50px ; 
+			      		height: 30px ; 
 			      		font-weight:bold;
 			      		float : center;
 
+			      	}
+
+			      	[id*="affmsg"] 
+			      	{ 
+			      		height: 475px;
 			      	}
 			      	
 			      	h4 
@@ -94,7 +98,7 @@
 				<div class="navbar navbar-inverse">
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
-					  	<li class="active"><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
+					  	<li class="active"><a href="Accueil.html">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
@@ -113,12 +117,19 @@
 					<table id="profil" align="right">
 						<tr><td colspan="2"><center><p>Utilisateur connecté</p></center></td></tr>
 					    <tr>
-					    	<td><img src="pdp.jpg" class="img-circle" alt="Profil" width="80" height="80"> &nbsp&nbsp</td>
-					    	<td> 
-					    		Franklin <br> 
-					    		Roosevelt <br> 
+					    		<?php 
+					    			$prenom = "prenom" ; 
+					    			$nom = "nom" ; 
+					    			$pdp = "" ; 
+					    			if(isset($_COOKIE['prenom'])) $prenom = $_COOKIE['prenom'];
+									if(isset($_COOKIE['nom'])) $nom = $_COOKIE['nom'];
+									if(isset($_COOKIE['pdp'])) $pdp = $_COOKIE['pdp'];
+
+									echo "<td><img src='".$pdp."' class='img-circle' alt='Profil' width='80' height='80'> &nbsp&nbsp</td><br>" ;
+									echo "<td> $prenom <br> $nom <br>" ;
+					    		?> 
 					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Deconnexion.php"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
 					    </tr>
 					    
@@ -136,16 +147,44 @@
 							<?php
 								$Login    = "root"      ; 
 						        $Pass     = ""          ;
-						        $DataBase = "tpnote2"   ;  
+						        $DataBase = "ecemplois"   ;  
 						        $Serveur  = "localhost" ;
-							?>
-						<div id="contact" class="container-fluid">
 
-						</div>
+						        $Connexion = new mysqli( $Serveur , $Login , $Pass , $DataBase ) ;
+						        if ($Connexion->connect_error) 
+						        {
+						            echo "Erreur lors de la connexion à la base de donnée" ; 
+						        }
+
+						        $sql = "SELECT * FROM utilisateur 
+						        		JOIN etreamis 
+						        		WHERE (utilisateur.numero_utilisateur = etreamis.numero_utilisateur1 
+						        		OR utilisateur.numero_utilisateur = etreamis.numero_utilisateur2) 
+						        		GROUP BY utilisateur.numero_utilisateur";
+						        $selection = mysqli_query($Connexion,$sql);
+
+						        while($donnees =  mysqli_fetch_assoc($selection))
+						        {
+						            echo "<div id='contact' class='container-fluid'>".$donnees['prenom']."&nbsp" .$donnees['nom'] ."</div><br>" ;
+        						}
+
+							?>
+						
 					</div>
 
 					<div id="messagePan" class="container-fluid">
 						<h4>Messagerie instantannée</h4><br>
+						<div id="affmsg" class="container-fluid">
+							
+						</div>
+						<footer>
+							<div id="navibar" class="navbar navbar-inverse">
+							    <form>
+									<div id="msgbar" class="col-xs-8"><input type="text" class="form-control" placeholder="Messages..."></div>
+								    <div id="butbar"class="col-xs-1"><button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-ok"></span></button></div>
+								</form>
+							</div>
+						</footer>
 					</div>
 
 
