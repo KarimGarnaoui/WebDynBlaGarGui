@@ -50,6 +50,7 @@ if($db_found){
 	setcookie('prenom',$donnees['prenom'], 0);
 	setcookie('nom',$donnees['nom'], 0);
 	setcookie('email',$donnees['email'], 0);
+	$num_user = $donnees['numero_utilisateur'] ; 
 	setcookie('numero_utilisateur',$donnees['numero_utilisateur'], 0);
 	setcookie('tel',$donnees['tel'], 0);
 	setcookie('statut',$donnees['statut'], 0);
@@ -58,10 +59,11 @@ if($db_found){
 	setcookie('pseudo',$donnees['pseudo'], 0);
 		
 
-	if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
-	$sql = "SELECT * FROM accessibilite where (numero_utilisateur='$numero_utilisateur' AND pdp = '1')" ;
+	
+	$sql = "SELECT * FROM accessibilite where (numero_utilisateur='$num_user' AND pdp = '1')" ;
 	$selection= mysqli_query($db_handle, $sql);	
 	$donnees=mysqli_fetch_assoc($selection);
+	echo"".$donnees['lien'] ; 
 	setcookie('pdp',$donnees['lien'], 0);
 
 		
