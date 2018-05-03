@@ -227,7 +227,7 @@
 						$date="";
 						$heure="";
 
-							if($_COOKIE['numero_evenement'] )
+							if(isset($_COOKIE['numero_evenement']) )
 							{
 								$numero_evenement=$_COOKIE['numero_evenement'];
 							}

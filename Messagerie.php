@@ -158,7 +158,7 @@
 									echo "<td> $prenom <br> $nom <br>" ;
 
 					    		?> 
-					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
+					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
 					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
 					    </tr>
