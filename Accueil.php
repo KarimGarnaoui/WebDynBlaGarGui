@@ -30,20 +30,33 @@
 			      		border-radius: 5px;
 			      		font-weight:bold;
 			      		width: 78%;
-			      		height: 700px ; 
+			      		height: 2000px ; 
 			      		float : left;
 
 			      	}
 			      	[id*="event1"] 
 			      	{ 
+
 			      		padding-right: 20px;
 			      		padding-left: 20px;
 			      		padding-bottom: 5px;
 			      		background-color: rgb(230, 230, 230) ;
 			      		border-radius: 10px;
 			      		color : black;
-			      		width: 80%;
-			      		float : center;
+			      		position:absolute;
+
+
+			      	}
+			      	[id*="resolvpb"] 
+			      	{ 
+
+			      		padding-right: 20px;
+			      		padding-left: 20px;
+			      		padding-bottom: 5px;
+			      		margin: 20px;
+			      		border-radius: 10px;
+			  			height: 300px ;
+			      		color : black;
 
 			      	}
 
@@ -73,14 +86,25 @@
 						border: 1px black solid;
 						border-radius: 5px ; 
 						width: 50% ; 
-						float: left ; 
+						float:left;
 					}
+
+					[id*="pborder2"]
+					{
+						border: 1px ;
+						border-radius: 5px ; 
+						width: 30% ;
+						margin-right: 10%; 
+						float: right;
+					}
+
 					[id*="pikevent"]
 					{
 						border: 1px black solid;
 						border-radius: 5px ; 
 						width: 150px; 
 						height: 150px;
+
 					}
 
 					[id*="titre"]
@@ -128,10 +152,31 @@
 					
 
 					}
+					[id*="dive"]
+					{
+						display: inline;
+						margin-right: right;
+					}
+
+					[id*="foot"]
+					{
+						position:relative;
+						bottom:0;
+						right: 0;
+						font-size:1em;
+					}
+
+					[id*="itali"]
+					{
+						font-style: italic;
+
+
+					}
 					button{
 						width:30px;
 						height: 10px;
 					}
+
 					
     		</style>
 			 
@@ -145,14 +190,14 @@
  					 <ul class="nav navbar-nav">
 					  	<li class="active"><a href="Accueil.html">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
-					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
-					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
+					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
+					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
-				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
+				     <form class="navbar-form navbar-right">
 						        <input type="text" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" name="recherche" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				     </form>
 					</div>
 				</div>
@@ -191,18 +236,25 @@
 					<div id="publier" class="container-fluid" >		
 				<tr>
 					<input  type="text" name="titre" placeholder="titre">
+					&nbsp &nbsp &nbsp 
 					<h8> Accessibilité: </h8>
+					&nbsp
 					<input type="radio" name="acces" value="amis" id="dive" /> <label for="amis">Amis</label>
        				<input type="radio" name="acces" value="reseau" id="dive" /> <label for="reseau">Reseau</label>
        				<input type="radio" name="acces" value="tous" id="dive" /> <label for="tous">Tous</label>
        				</tr>
 				<tr>
-					<input  id="page" type="text" name="description" placeholder="Exprimez-vous ..."> <br> <br>
+					<input  id="page" type="text" name="description_evenement" placeholder="Exprimez-vous ..."> <br> <br>
 				</tr>
                   	<tr >
                   	 <span type="file" class="glyphicon glyphicon-paperclip"></span> Ajouter une image: </td>
                       <input type="file" id ="dive" name="image">     <br> 
 					<input type="text" id="dive" name="description" placeholder="Commenter la piece jointe ..."> 
+					&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+       				<input type="text" id="dive" name="action" placeholder="Que faites vous ..."> 
+       				<br> <br>
+       				<h8> Humeur: </h8>
+       				&nbsp &nbsp &nbsp
 					<input type="radio" name="humeur" value="contente" id="dive" /> <label for="contente">Content</label>
        				<input type="radio" name="humeur" value="triste" id="dive" /> <label for="triste">Triste</label>
        				<input type="radio" name="humeur" value="enerve" id="dive" /> <label for="enerve">Enerve</label> <br> <br>
@@ -214,7 +266,7 @@
 			         </tr>
                   </form>
                   </div>
-
+                 <div class="container-fluid">
                  <?php 
 
                   		$database = "ecemplois";
@@ -227,51 +279,78 @@
 						$date="";
 						$heure="";
 
-							if(isset($_COOKIE['numero_evenement']) )
+							if(isset($_COOKIE['numero_evenement']))
 							{
 								$numero_evenement=$_COOKIE['numero_evenement'];
 							}
 
+							if(isset($_COOKIE['nom']))
+							{
+								$nom=$_COOKIE['nom'];
+							}
+							if(isset($_COOKIE['prenom']))
+							{
+								$prenom=$_COOKIE['prenom'];
+							}
+
 						if($db_found){
-							$sql1 = "SELECT nom_evenement, descriptif_evenement FROM evenement where numero_evenement='$numero_evenement'";
-							$selection= mysqli_query($db_handle, $sql1);
+							
 
-
-							while($data=mysqli_fetch_assoc($selection)){
-									$nom_evenement =$data['nom_evenement'];
-									$descriptif_evenement =$data['descriptif_evenement'];
-								}
-
-								$sql2 = "SELECT piece_jointe.lien, sentiment, date, heure FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien where evenement.numero_evenement='$numero_evenement'";
+								$sql2 = "SELECT piece_jointe.lien, sentiment, evenement.date, evenement.heure, description, nom_evenement, descriptif_evenement,action FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien ";
 
 
 
 								$selection2= mysqli_query($db_handle, $sql2);
 
 								while($data2=mysqli_fetch_assoc($selection2)){
+
 									$lien =$data2['lien'];
 									$sentiment =$data2['sentiment'];
 									$date =$data2['date'];
 									$heure =$data2['heure'];
-								}
+									$description =$data2['description'];
+									$action =$data2['action'];
+									$nom_evenement =$data2['nom_evenement'];
+									$descriptif_evenement =$data2['descriptif_evenement'];
 
+							
+
+
+							echo "<div id='resolvpb' class='container-fluid'> ";
 							echo"<div id = 'event1' class='container-fluid'>";
 							echo"<h4> $nom_evenement </h4>";
 							echo"<p id='pborder'>";
-							echo"Description <br>";
-							echo"$descriptif_evenement <br><br><br>";
+							echo"<i>$sentiment en train de $action </i><br> <br>";
+							echo"$descriptif_evenement <br>";
 							echo"</p>";
-							echo"<p align='right'><img id='pikevent' src=$lien width='148' height='148' ></p>";
-							echo"<p>Publication de : Franklin</p>";
+							if($lien!="")
+							{
+							echo"<p align='center' id='image'> <a href=$lien> <img id='pikevent' src=$lien width='148' height='148' > </a></p>";
+							echo"<p id='pborder2'>";
+							echo"$description";
+							echo"</p><br><br>";
+							}
+							
+							echo"<br> <br>";
 							echo"<footer>";
-							echo"<p align='left'> Publier le $date à $heure heure</p>";
-							echo"<p align='right'><a href='Aimer.php'><span class='glyphicon glyphicon-thumbs-up'></span> J'aime &nbsp&nbsp&nbsp&nbsp<a href='Partager.php'><span class='glyphicon glyphicon-share'></span> Partager</p>";
+							echo"<small>";
+							echo" <i><p id='foot'>Publication de : $prenom $nom ";
+							echo"le $date à $heure heure </i>";
+						    
+						    echo"&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp";
+						    echo"<a href='Aimer.php'><span class='glyphicon glyphicon-thumbs-up'></span> J aime &nbsp&nbsp&nbsp&nbsp<a href='Partager.php'><span class='glyphicon glyphicon-share'></span> Partager </a></p>";
+							
+							echo"</small>";
 							echo"</footer>";
-						echo"</div>";
+						    echo"</div>";
+						    echo"</div>";
+						    echo"<br> <br>";
+						
 					}
+				}
 
                   ?> 
-	
+				</div>
 
 					   
 			    </div>
