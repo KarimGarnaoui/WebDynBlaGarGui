@@ -30,7 +30,6 @@
 			      		border-radius: 5px;
 			      		font-weight:bold;
 			      		width: 78%;
-			      		height: 700px ; 
 			      		float : left;
 
 			      	}
@@ -75,15 +74,15 @@
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
-					  	<li class="active"><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" name="recherche" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+						        <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				     </form>
 					</div>
 				</div>
@@ -116,29 +115,18 @@
 			    <!-- Affichage des evênements  -->
 
 			    <div id="monreseau" class="container-fluid">
-					<h3>Contacts</h3><br><br><br>
+					<h3>Résultats de la recherche : </h3>
 					<?php 
-						// <div id = "contact" class="container-fluid">
-						// 	<h4>Jimmy Neutron<br></h4>
-						// 	<p id="pborder">
-						// 		<span class="glyphicon glyphicon-comment"></span>&nbsp  jneutron@mail.com <br>
-						// 		<span class="glyphicon glyphicon-phone"></span>&nbsp +33 6 24 51 65 45<br><br><br>
-						// 	</p>
-						// 	<p align="right"><img id="pikevent" src="jimmy.jpg" width="148" height="148" ></p>
-							
-						// </div>
-
+						$recherche = isset($_POST["recherche"])?$_POST["recherche"] : ""; 
+						echo "<p>'$recherche'</p><br>";
 						$Connexion = new mysqli( 'localhost' , "root" , "" , "ecemplois" ) ;
 						if ($Connexion->connect_error)echo "Erreur lors de la connexion à la base de donnée" ;
 						if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
-
-						$sql = "SELECT * FROM utilisateur 
-							        		JOIN etrecontactpro 
-							        		WHERE (('$numero_utilisateur' = etrecontactpro.numero_utilisateur1 OR '$numero_utilisateur' = etrecontactpro.numero_utilisateur2) 
-							        		AND (utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur1 OR utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur2) )
-							        		GROUP BY utilisateur.numero_utilisateur";
+						$recherche = "%".$recherche."%" ;
+						$sql = "SELECT * FROM utilisateur WHERE ((prenom LIKE '$recherche')OR(nom LIKE '$recherche'))";
 				        $selection = mysqli_query($Connexion,$sql);
-
+				        echo "<div class='container-fluid'>";
+				        echo "<h4><span class='glyphicon glyphicon-user'> Personnes : </h4>";
 				        while($donnees =  mysqli_fetch_assoc($selection))
 				        {
 				        	if($donnees['numero_utilisateur']!=$numero_utilisateur)
@@ -158,7 +146,23 @@
 					        	echo "</div>" ; 
 				        	}
 						}
-
+						echo "</div>";
+						$sql = "SELECT * FROM emplois WHERE ((profession LIKE '$recherche')OR(description LIKE '$recherche'))";
+				        $selection = mysqli_query($Connexion,$sql);
+				        echo "<div class='container-fluid'>";
+				        echo "<h4><span class='glyphicon glyphicon-briefcase'> Offre d'emplois : </h4>";
+				        while($donnees =  mysqli_fetch_assoc($selection))
+				        {
+				        	
+					        	echo "<div id = 'contact' class='container-fluid'>" ;
+					        	echo "<h4> Profession : ".$donnees['profession']."<br></h4>" ; 
+					        	echo "<p id='pborder'>" ; 
+					        		echo "Description : ".$donnees['description']."<br>" ;  
+					        	echo "</p>" ; 
+					        	echo "</div>" ; 
+				        	
+						}
+						echo "</div>";
 					?>	
 			    </div>
 

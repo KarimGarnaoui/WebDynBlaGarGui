@@ -56,14 +56,14 @@
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
-					  	<li><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
-					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
-					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
-					  	<li class="active"><a href="Photos.html">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
-					  	<li><a href="Messagerie.html">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
+					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
+					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
+					  	<li class="active"><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
+					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
-				     <form class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
+				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
+						        <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
 						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				     </form>
 					</div>
@@ -86,7 +86,7 @@
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
                             
-					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
+					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
 					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
 					    </tr>

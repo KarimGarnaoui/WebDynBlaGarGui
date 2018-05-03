@@ -145,14 +145,14 @@
  					 <ul class="nav navbar-nav">
 					  	<li class="active"><a href="Accueil.html">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
-					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
-					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
+					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
+					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
-				     <form class="navbar-form navbar-right">
+				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
 						        <input type="text" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+						        <button type="submit" name="recherche" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				     </form>
 					</div>
 				</div>
