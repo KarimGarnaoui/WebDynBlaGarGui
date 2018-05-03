@@ -14,6 +14,7 @@
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
+			      		padding-top: 5px;
 			      		padding-bottom: 5px;
 			      		background-color: rgb(200, 200, 200) ;
 			      		border-radius: 5px;
@@ -25,6 +26,10 @@
                      {
 			      		width: 40%;
                         float : left;
+                        border: 1px black solid;
+						border-radius: 5px ; 
+                        margin: 10px;
+                        
                      }
 			     
 			      	h4 
@@ -51,11 +56,11 @@
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
-					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
-					  	<li class="active"><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
-					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
+					  	<li class="active"><a href="Photos.html">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
+					  	<li><a href="Messagerie.html">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form class="navbar-form navbar-right">
 						        <input type="search" class="input-sm form-control" placeholder="Recherche">
@@ -68,6 +73,7 @@
 				<div id="principal" class="container-fluid">
 					<table id="profil" align="right">
 						<tr>
+                            
 					    		<?php 
 					    			$prenom = "prenom" ; 
 					    			$nom = "nom" ; 
@@ -79,6 +85,7 @@
 									echo "<td><img src='".$pdp."' class='img-circle' alt='Profil' width='80' height='80'> &nbsp&nbsp</td><br>" ;
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
+                            
 					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
 					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
 					    	</td>
@@ -159,10 +166,10 @@
                   </div>
                                     Ajouter une image: <br>  
                                     <form action="ajouter.php" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="imageadd" id="imageadd"><br>
+                                    <input type="file" name="imageajouter" id="imageadd"><br>
                                     <input type="submit" value="Ajouter" name="addimg"><br><br>
                                     </form>
-                                    
+                                   
                     
 			    </div>
                     
