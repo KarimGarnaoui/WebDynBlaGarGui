@@ -197,15 +197,15 @@
 				<div class="navbar navbar-inverse">
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
-					  	<li class="active"><a href="Accueil.html">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
+					  	<li class="active"><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.phpl">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
-				     <form class="navbar-form navbar-right">
-						        <input type="text" class="input-sm form-control" placeholder="Recherche">
+				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
+						        <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
 						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				     </form>
 					</div>
@@ -288,6 +288,7 @@
 						$date="";
 						$heure="";
 
+						if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'] ;
 							
 
 							if(isset($_COOKIE['nom']))
@@ -300,9 +301,22 @@
 							}
 
 						if($db_found){
-							
+							 
 
-								$sql2 = "SELECT piece_jointe.lien, statut, sentiment, evenement.date, evenement.heure, description, nom_evenement, descriptif_evenement,action, evenement.numero_evenement FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien ORDER BY evenement.date";
+							
+								$sql2 = "SELECT * FROM evenement JOIN piece_jointe JOIN contenir JOIN etreamis JOIN etrecontactpro
+    									 WHERE         ((((   ( (etreamis.numero_utilisateur1 = evenement.numero_utilisateur) AND (etreamis.numero_utilisateur2 = '$numero_utilisateur') ) 
+    									                    OR( (etreamis.numero_utilisateur2 = evenement.numero_utilisateur) AND (etreamis.numero_utilisateur1 = '$numero_utilisateur') )) OR (evenement.numero_utilisateur='$numero_utilisateur')))
+    									                    AND ( ( (evenement.statut = 'amis') OR (evenement.numero_utilisateur='$numero_utilisateur') )
+    									                       OR ( (evenement.statut = 'tous') OR (evenement.numero_utilisateur='$numero_utilisateur')))) 
+
+    									               OR ((( ((etrecontactpro.numero_utilisateur1 = evenement.numero_utilisateur) AND (etrecontactpro.numero_utilisateur2 = '$numero_utilisateur') )
+    									                    OR((etrecontactpro.numero_utilisateur2 = evenement.numero_utilisateur) AND (etrecontactpro.numero_utilisateur1 = '$numero_utilisateur') ))
+
+    									                    OR (evenement.numero_utilisateur='$numero_utilisateur')))AND (  ( (evenement.statut = 'reseau') 
+    									                    OR (evenement.numero_utilisateur='$numero_utilisateur') )OR ( (evenement.statut = 'tous') 
+    									                    OR (evenement.numero_utilisateur='$numero_utilisateur')))
+										GROUP BY evenement.numero_evenement";
 
 
 
@@ -312,8 +326,8 @@
 
 									$lien =$data2['lien'];
 									$sentiment =$data2['sentiment'];
-									$date =$data2['date'];
-									$heure =$data2['heure'];
+									$date =$data2['Date'];
+									$heure =$data2['Heure'];
 									$description =$data2['description'];
 									$action =$data2['action'];
 									$nom_evenement =$data2['nom_evenement'];
@@ -321,6 +335,8 @@
 									$statut =$data2['statut'];
 									$numero_evenement =$data2['numero_evenement'];
 							
+
+
 							echo"<form action='Traitement_supprimer.php' method='post'>";
 							echo"<p colspan='2' align='right' id='supr'><input type='submit' name='Supprimer' value='Supprimer'> </p> <br>";
 							echo"<input type='hidden' name='numero_evenement' value='$numero_evenement'> ";
@@ -364,10 +380,11 @@
 						    echo"</div>";
 						    echo"<br> <br>";
 						    echo"</form>";
+						}
 
 
 						
-					}
+					
 				}
 
                   ?> 
