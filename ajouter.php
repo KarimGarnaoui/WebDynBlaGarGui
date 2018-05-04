@@ -36,7 +36,7 @@ else {
 $sql2="INSERT INTO accessibilite (numero_utilisateur,lien, pdp) VALUES ('$numero_user','$link','')";
 
 if(mysqli_query($db_handle, $sql2)){
-    echo "WAAAAAAAAAAAA";
+    echo "yh";
 }
 else{
     echo "nop";

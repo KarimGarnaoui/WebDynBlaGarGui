@@ -29,6 +29,20 @@
                         border: 1px black solid;
 						border-radius: 5px ; 
                         margin: 10px;
+                        background: #E2CDFA;
+                        
+                     }
+                 
+                    [id*="albumsaff"]
+                     {
+			      		width: 40%;
+                        float : left;
+                        border: 1px black solid;
+						border-radius: 5px ; 
+                        margin: 10px;
+                        text-align: center;
+                        background: #E2E5E6;
+                        
                         
                      }
 			     
@@ -36,14 +50,32 @@
 			      	{
 					    font-weight: bold;
 					}
+                 
 					[id*="pborder"]
 					{
 						border: 1px black solid;
 						border-radius: 5px ; 
 						width: 50% ; 
 						float: left ; 
-					}
-					
+					}	
+                 
+                 [id*="album"]
+                 {
+                    text-align: center;
+                    margin:10px;
+                 }
+                 
+                 [id*="photos"]
+                 {
+                    text-align: center;
+                    margin:10px;
+                 }
+                 
+                 [id*="imageadd"]
+                 {
+                     margin-left: 40%;
+                     
+                 }
 					
     		</style>
 			 
@@ -128,7 +160,7 @@
                        
                      if($db_found){
                          
-                     $sql="SELECT lien FROM accessibilite WHERE numero_utilisateur='$numero_user'";
+                     $sql="SELECT * FROM accessibilite WHERE numero_utilisateur='$numero_user'";
                          
                      $selection= mysqli_query($db_handle, $sql);
                          
@@ -159,16 +191,117 @@
                                       
                            
                                 </div>
-                         </div>
-                    <div id="album" class="tab-pane fade"></div>
-                             
-                    
-                  </div>
+                        
                                     Ajouter une image: <br>  
                                     <form action="ajouter.php" method="post" enctype="multipart/form-data">
                                     <input type="file" name="imageajouter" id="imageadd"><br>
                                     <input type="submit" value="Ajouter" name="addimg"><br><br>
                                     </form>
+                        
+                         </div>
+                     
+                    <div id="album" class="tab-pane fade">
+                        <div class="row">
+                        
+                                    <?php
+                            
+                                        $numero_user2 = $_COOKIE['numero_utilisateur'];
+                                        $iterator = new DirectoryIterator('albums/');
+                                        $document = "";   
+                                        $document2 = "";
+                                        $document3 = "";
+                                        $nomfichier = "";
+                                        $nomfichier2 = ""; 
+                                        $nomfichier3="";
+                                        $nomIMG = "";
+                                        $nomimageF = "";
+                                        
+                        
+                                        
+                                             foreach($iterator as $document)
+                                             {
+                                              
+                                             $nomfichier = $document->getFilename();
+                                                   
+                                            if($document==$numero_user){     
+                                            if(!$document->isDot()){
+                                            
+                                                
+                                              $nomIMG = 'albums/' . $numero_user2 . "/"; 
+                                              $iterator2 = new DirectoryIterator($nomIMG);
+                                                
+                                              foreach($iterator2 as $document2 )
+                                              {
+                                              
+                                              $nomfichier2 = $document2->getFilename();
+                                                
+                                                  
+                                              if(!$document2->isDot()){
+                                                   echo"<div id='albumsaff' class='text'>";
+                                                   echo"<p style='font-size:25px; text-decoration: underline;'>$nomfichier2</p>";
+                                                  
+                                                  $nomimage = $nomIMG . $nomfichier2.'/';
+                                                  $iterator3 = new DirectoryIterator($nomimage);
+                                                  
+                                                  foreach($iterator3 as $document3){
+                                                      
+                                                      $nomfichier3 = $document3->getFilename();
+                                                      
+                                                      if(!$document3->isDot()){
+                                                          $nomimageF = $nomimage . $nomfichier3;
+            
+                                                          
+                                              echo"<div id='photograph' class='thumbnail'>";
+                                              echo"<a href=$nomimageF target='_blank'>";
+                                              echo"<img src=$nomimageF style='width:50%'>";
+                                              echo"<div class='caption'>";
+                                              echo"<footer>";
+                                              echo"<p align='right' ><a href='Aimer.php'><span class='glyphicon glyphicon-thumbs-up'></span> J'aime &nbsp&nbsp&nbsp&nbsp<a  href='Partager.php'><span class='glyphicon glyphicon-share'></span> Partager</p>";
+                                              echo"</a>";
+                                              echo"</a>";
+                                              echo"</footer>";
+                                              echo"</div>";
+                                              echo"</div>";
+                                                          
+                                                      }
+                                                  
+                                                  }
+                                                  echo"</div>";
+                                                  
+                                              }
+                                                  
+                                                  
+                                              }            
+                                        
+                                                
+                                              }
+                                             }
+                                         }   
+                            
+                        
+                                    ?>
+                            
+                                    
+                        
+                     </div>
+                        
+                                    Ajouter un album: <br>  
+                                    <form action="newAlbum.php" method="post" enctype="multipart/form-data">
+                                        <input type="text" name="nomalbum" id="albumAdd"><br>
+                                        <input type="submit" value="Créer"><br><br><br>
+                                    </form>
+                        
+                                    Ajouter une photo à un album: <br>
+                                    <form action="newPhotoAlbum.php" method="post" enctype="multipart/form-data">
+                                        <input type="text" name="nomalbum" id="albumphotoAdd" placeholder="Nom de l'album"><br>
+                                        <input type="file" name="imageajouter" id="imageadd"><br>
+                                        <input type="submit" value="Ajouter"><br><br>
+                                    </form>
+                    </div>
+                             
+                    
+                  </div>
+                                    
                                    
                     
 			    </div>
@@ -178,4 +311,4 @@
 			</div> 
 
 		</body>
-</html>
+</html> 
