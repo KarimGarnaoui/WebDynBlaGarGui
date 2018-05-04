@@ -30,7 +30,6 @@
 			      		border-radius: 5px;
 			      		font-weight:bold;
 			      		width: 78%;
-			      		height: 2000px ; 
 			      		float : left;
 
 			      	}
@@ -162,7 +161,7 @@
 
 					[id*="foot"]
 					{
-						position:relative;
+						position:relative;	
 						bottom:0;
 						right: 0;
 						font-size:1em;
@@ -174,9 +173,17 @@
 
 
 					}
+
+					[id*="supr"]
+					{
+						float:right;
+						margin-right: 40px;
+
+
+					}
 					button{
-						width:30px;
-						height: 10px;
+						width:60px;
+						height: 20px;
 					}
 
 					
@@ -281,10 +288,7 @@
 						$date="";
 						$heure="";
 
-							if(isset($_COOKIE['numero_evenement']))
-							{
-								$numero_evenement=$_COOKIE['numero_evenement'];
-							}
+							
 
 							if(isset($_COOKIE['nom']))
 							{
@@ -298,7 +302,7 @@
 						if($db_found){
 							
 
-								$sql2 = "SELECT piece_jointe.lien, statut, sentiment, evenement.date, evenement.heure, description, nom_evenement, descriptif_evenement,action FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien ORDER BY evenement.date";
+								$sql2 = "SELECT piece_jointe.lien, statut, sentiment, evenement.date, evenement.heure, description, nom_evenement, descriptif_evenement,action, evenement.numero_evenement FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien ORDER BY evenement.date";
 
 
 
@@ -315,13 +319,15 @@
 									$nom_evenement =$data2['nom_evenement'];
 									$descriptif_evenement =$data2['descriptif_evenement'];
 									$statut =$data2['statut'];
-									
-					
-
+									$numero_evenement =$data2['numero_evenement'];
 							
-							echo"<form action='Traitement_Partager.php' method='post'>";
+							echo"<form action='Traitement_supprimer.php' method='post'>";
+							echo"<p colspan='2' align='right' id='supr'><input type='submit' name='Supprimer' value='Supprimer'> </p> <br>";
+							echo"<input type='hidden' name='numero_evenement' value='$numero_evenement'> ";
+							echo"</form>";
 
 							echo "<div id='resolvpb' class='container-fluid'> ";
+							echo"<form action='Traitement_Partager.php' method='post'>";
 							echo"<div id = 'event1' class='container-fluid'>";
 							echo"<input type='hidden' name='nom_evenement' value='$nom_evenement'> <h4> $nom_evenement </h4>";
 							echo"<p id='pborder'>";
@@ -341,7 +347,6 @@
 							echo"<input type='hidden' name='description' value='$description'> $description";
 							echo"</p><br><br>";
 							}
-							
 							echo"<br> <br>";
 							echo"<footer>";
 							echo"<small>";
@@ -349,8 +354,9 @@
 							echo"le $date à $heure heure </i>";
 						    
 						    echo"&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp";
-						    echo"<span class='glyphicon glyphicon-thumbs-up'></span>  <input type='submit'href='Aimer.php' value='J aime'> &nbsp&nbsp&nbsp&nbsp 
-						    	<span class='glyphicon glyphicon-share'></span>  <input type='submit' href='Partager.php' value='Partager'></p>";
+						   echo"<span class='glyphicon glyphicon-share'></span>  <input type='submit' href='Partager.php' value='Partager'> &nbsp&nbsp&nbsp&nbsp 
+						   <span class='glyphicon glyphicon-edit'></span>  <input type='submit' href='Comenter.php' value='Comentaire'> &nbsp&nbsp&nbsp&nbsp  	
+						    	<span class='glyphicon glyphicon-thumbs-up'></span>  <button href='Aimer.php'  value='J aime'>J aime </button></p>";
 							
 							echo"</small>";
 							echo"</footer>";
@@ -358,6 +364,8 @@
 						    echo"</div>";
 						    echo"<br> <br>";
 						    echo"</form>";
+
+
 						
 					}
 				}

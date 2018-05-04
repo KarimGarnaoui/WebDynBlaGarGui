@@ -25,6 +25,7 @@
 		$description = isset($_POST["description"])?$_POST["description"] : "";
 		$action = isset($_POST["action"])?$_POST["action"] : "";
 		$acces = isset($_POST["statut"])?$_POST["statut"] : "";
+
 		if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
 		$date= date("Y-m-d");
 	    $heure=date("H:i:s");

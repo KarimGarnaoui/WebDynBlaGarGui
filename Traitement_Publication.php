@@ -1,19 +1,18 @@
  <?php 								
- 								$image="";
- 								$titre="";
-					   			$description_evenement="";
-					   			$acces="";
-					   			$numero_utilisateur="";
-					   			$image="";
-					   			$lien="";
-					   			$lien2="";
-					   			$date="";
-					   			$heure="";
-					   			$description="";
-					   			$sentiment="";
-					   			$compteur="";
-
-
+ 
+	 								$image="";
+	 								$titre="";
+						   			$description_evenement="";
+						   			$acces="";
+						   			$numero_utilisateur="";
+						   			$image="";
+						   			$lien="";
+						   			$lien2="";
+						   			$date="";
+						   			$heure="";
+						   			$description="";
+						   			$sentiment="";
+						   			$compteur="";
 
 					   				$titre= isset($_POST["titre"])?$_POST["titre"] : ""; 
 									$description_evenement = isset($_POST["description_evenement"])?$_POST["description_evenement"] : ""; 
@@ -132,6 +131,8 @@
 										echo "La requete d'insertion5 a ete executee" ;
 										
 									}	
+
+
 
 									
 
