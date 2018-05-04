@@ -41,7 +41,7 @@
 			      		background-color: rgb(230, 230, 230) ;
 			      		border-radius: 10px;
 			      		color : black;
-			      		width: 40%;
+			      		width: 45%;
 			      		float: left ;
 			      		margin-left: 20px;
 			      		margin-bottom: 20px;
@@ -53,8 +53,15 @@
 					}
 					[id*="pborder"]
 					{
-						width: 70% ; 
+						width: 77% ; 
+						height: 100px;
 						float: left ; 
+					}
+					[id*="photo"]
+					{
+						width: 22% ; 
+						margin: 0;
+						float: right ; 
 					}
 					[id*="pikevent"]
 					{
@@ -62,6 +69,34 @@
 						border-radius: 5px ; 
 						width: 75px; 
 						height: 75px;
+					}
+					[id*="notif"]
+					{
+						font-size: .8em ;
+						margin: 0px ; 
+						padding: 0px ; 
+						background-color: transparent;
+						color: blue ; 
+						font-weight: bold;
+						border: none ; 
+					}
+					[id*="notif2"]
+					{
+						font-size: .8em ;
+						margin: 0px ; 
+						padding: 0px ; 
+						background-color: transparent;
+						color: red ; 
+						font-weight: bold;
+						border: none ; 
+					}
+					p{
+						padding: 0px;
+						margin: 0px;
+					}
+					.bouton_submit:hover{
+						color: rgb(150,150,250); 
+						text-decoration: underline;
 					}
     		</style>
 			 
@@ -75,6 +110,7 @@
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
@@ -132,17 +168,39 @@
 				        	if($donnees['numero_utilisateur']!=$numero_utilisateur)
 				        	{
 					        	echo "<div id = 'contact' class='container-fluid'>" ;
+					        	
 					        	echo "<h4>".$donnees['prenom']." ".$donnees['nom'] ."<br></h4>" ; 
-					        	echo "<p id='pborder'>" ; 
+					        	echo "<div id='pborder' class='container-fluid'>" ; 
+					        		
+					        		// echo "</p>" ;
+					        		echo "<form action='Traitement_Ajout_Amis_Potentiellement' method='post'>"; 
 					        		echo "<span class='glyphicon glyphicon-comment'></span>&nbsp  ".$donnees['email']."<br>" ; 
-					        		echo "<span class='glyphicon glyphicon-phone'></span>&nbsp ".$donnees['tel']."<br><br><br>" ; 
-					        	echo "</p>" ;
+					        		echo "<span class='glyphicon glyphicon-phone'></span>&nbsp ".$donnees['tel']."<br>" ;
+					        			// echo "<p>";
+						        		echo "<input type='submit' value='+Amis' id='notif' class='bouton_submit'> <br>" ; 
+						        		echo "<input type='hidden' value=".$donnees['numero_utilisateur']." name='numero_recepteur'>" ; 
+						        		// echo "</p>" ;
+					        		echo "</form>";
+					        		echo "<form action='Traitement_Ajout_Contact_Pro_Potentiellement' method='post'>";
+					        			// echo "<p>";
+						        		echo "<input type='submit' value='+Contact pro' id='notif' class='bouton_submit'>" ; 
+						        		echo "<input type='hidden' value=".$donnees['numero_utilisateur']." name='numero_recepteur'>" ;
+						        		// echo "</p>" ;
+					        		echo "</form>";
+					        		echo "<form action='Traitement_Supprimer_Utilisateur.php' method='post'>";
+					        			// echo "<p>";
+						        		echo "<input type='submit' value='-Supprimer l utilisateur' id='notif2' class='bouton_submit'>" ; 
+						        		echo "<input type='hidden' value=".$donnees['numero_utilisateur']." name='numero_recepteur'>" ;
+						        		// echo "</p>" ;
+					        		echo "</form>";
+					        		echo "</div>";
+					        	
 					        	$num_user_actuel = $donnees['numero_utilisateur'] ; 
 					        	$sqlPhoto = "SELECT lien FROM accessibilite WHERE (numero_utilisateur = $num_user_actuel AND pdp = 1)" ; 
 					        	$selectionPhoto = mysqli_query($Connexion,$sqlPhoto);
 					        	$donneesPhoto =  mysqli_fetch_assoc($selectionPhoto) ; 
-
-					        	echo "<p align='right'><img id='pikevent' src=".$donneesPhoto['lien']." width='148' height='148' ></p>" ; 
+					        	echo "<p id='photo'><img id='pikevent' src=".$donneesPhoto['lien']." width='148' height='148' ></p><br>" ; 
+					 
 					        	echo "</div>" ; 
 				        	}
 						}

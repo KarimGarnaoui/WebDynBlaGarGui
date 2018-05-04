@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<html lang="en">
 		<head>
-			 <title>Mon Réseau</title>
+			 <title>ECEmplois</title>
 			 <meta charset="utf-8">
 			 <meta name="viewport" content="width=device-width, initial-scale=1">
 			 <link rel="stylesheet"
@@ -57,12 +57,9 @@
 						width: 70% ; 
 						float: left ; 
 					}
-					[id*="pikevent"]
+					[id*="enregistrer"]
 					{
-						border: 1px black solid;
-						border-radius: 5px ; 
-						width: 75px; 
-						height: 75px;
+						float: right;
 					}
     		</style>
 			 
@@ -75,9 +72,9 @@
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
-					  	<li class="active"><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
-					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
+					  	<li class="active"><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
@@ -117,47 +114,53 @@
 			    <!-- Affichage des evênements  -->
 
 			    <div id="monreseau" class="container-fluid">
-					<h3>Contacts</h3><br><br><br>
+					<h3>Notifications</h3><br><br><br>
 					<?php 
-						// <div id = "contact" class="container-fluid">
-						// 	<h4>Jimmy Neutron<br></h4>
-						// 	<p id="pborder">
-						// 		<span class="glyphicon glyphicon-comment"></span>&nbsp  jneutron@mail.com <br>
-						// 		<span class="glyphicon glyphicon-phone"></span>&nbsp +33 6 24 51 65 45<br><br><br>
-						// 	</p>
-						// 	<p align="right"><img id="pikevent" src="jimmy.jpg" width="148" height="148" ></p>
-							
-						// </div>
 
 						$Connexion = new mysqli( 'localhost' , "root" , "" , "ecemplois" ) ;
 						if ($Connexion->connect_error)echo "Erreur lors de la connexion à la base de donnée" ;
 						if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
 
-						$sql = "SELECT * FROM utilisateur 
-							        		JOIN etrecontactpro 
-							        		WHERE (('$numero_utilisateur' = etrecontactpro.numero_utilisateur1 OR '$numero_utilisateur' = etrecontactpro.numero_utilisateur2) 
-							        		AND (utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur1 OR utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur2) )
-							        		GROUP BY utilisateur.numero_utilisateur";
+						
+
+						$sql = "SELECT * FROM notification WHERE numero_recepteur = $numero_utilisateur";
 				        $selection = mysqli_query($Connexion,$sql);
 
 				        while($donnees =  mysqli_fetch_assoc($selection))
 				        {
-				        	if($donnees['numero_utilisateur']!=$numero_utilisateur)
-				        	{
+				        		$numero_emetteur = $donnees['numero_emetteur'] ;
+				        		$sql_emetteur = "SELECT * FROM utilisateur WHERE numero_utilisateur = '$numero_emetteur'";
+				        		$selection_emetteur = mysqli_query($Connexion,$sql_emetteur) ; 
+				        		$donnees_emetteur =  mysqli_fetch_assoc($selection_emetteur) ;
+				        		$nom_emetteur = $donnees_emetteur['nom'];
+				        		$prenom_emetteur = $donnees_emetteur['prenom'];
+				        		$numero_emetteur = $donnees_emetteur['numero_utilisateur'];
+				        	if($donnees['description'] == 'Demande d amis'){
+				        		echo "<form action='Traitement_Ajout_Amis.php' method='post'>";
 					        	echo "<div id = 'contact' class='container-fluid'>" ;
-					        	echo "<h4>".$donnees['prenom']." ".$donnees['nom'] ."<br></h4>" ; 
-					        	echo "<p id='pborder'>" ; 
-					        		echo "<span class='glyphicon glyphicon-comment'></span>&nbsp  ".$donnees['email']."<br>" ; 
-					        		echo "<span class='glyphicon glyphicon-phone'></span>&nbsp ".$donnees['tel']."<br><br><br>" ; 
-					        	echo "</p>" ;
-					        	$num_user_actuel = $donnees['numero_utilisateur'] ; 
-					        	$sqlPhoto = "SELECT lien FROM accessibilite WHERE (numero_utilisateur = $num_user_actuel AND pdp = 1)" ; 
-					        	$selectionPhoto = mysqli_query($Connexion,$sqlPhoto);
-					        	$donneesPhoto =  mysqli_fetch_assoc($selectionPhoto) ; 
-
-					        	echo "<p align='right'><img id='pikevent' src=".$donneesPhoto['lien']." width='148' height='148' ></p>" ; 
+					        	echo "<h4>".$donnees['description']."<br></h4>" ; 
+					        	echo "<p>".$prenom_emetteur." ".$nom_emetteur."</p>" ;
+					        	echo "<input type='hidden' value='".$numero_emetteur."' name='numero_emetteur' "; 
+					        	echo "<p><input type='radio' id = 'Accepter' name='choix' value='Accepter'><label for='Accepter'>&nbsp Accepter</label></p>" ; 
+					        	echo "<p><input type='radio' id = 'Refuser' name='choix' value='Refuser'><label for='Refuser'>&nbsp Refuser</label></p>" ; 
+					        	echo "<p id='enregistrer'><input type='submit' value='Confirmer'></p>" ;
 					        	echo "</div>" ; 
+					        	echo "</form>";
 				        	}
+				        	if($donnees['description'] == 'Demande de contact pro'){
+				        		echo "<form action='Traitement_Ajout_Contact_Pro.php' method='post'>";
+					        	echo "<div id = 'contact' class='container-fluid'>" ;
+					        	echo "<h4>".$donnees['description']."<br></h4>" ; 
+					        	echo "<p>".$prenom_emetteur." ".$nom_emetteur."</p>" ;
+					        	echo "<input type='hidden' value='".$numero_emetteur."' name='numero_emetteur' "; 
+					        	echo "<p><input type='radio' id = 'Accepter' name='choix' value='Accepter'><label for='Accepter'>&nbsp Accepter</label></p>" ; 
+					        	echo "<p><input type='radio' id = 'Refuser' name='choix' value='Refuser'><label for='Refuser'>&nbsp Refuser</label></p>" ; 
+					        	echo "<p id='enregistrer'><input type='submit' value='Confirmer'></p>" ;
+					        	echo "</div>" ; 
+					        	echo "</form>";
+				        	}
+				        		
+				        	
 						}
 
 					?>	

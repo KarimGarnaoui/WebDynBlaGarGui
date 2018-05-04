@@ -75,12 +75,13 @@
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
-					  	<li class="active"><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
-					  	<li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
+					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li class="active"><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
+
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
 						        <input type="search" class="input-sm form-control" placeholder="Recherche">
@@ -117,26 +118,17 @@
 			    <!-- Affichage des evênements  -->
 
 			    <div id="monreseau" class="container-fluid">
-					<h3>Contacts</h3><br><br><br>
+					<h3>Amis</h3><br><br><br>
 					<?php 
-						// <div id = "contact" class="container-fluid">
-						// 	<h4>Jimmy Neutron<br></h4>
-						// 	<p id="pborder">
-						// 		<span class="glyphicon glyphicon-comment"></span>&nbsp  jneutron@mail.com <br>
-						// 		<span class="glyphicon glyphicon-phone"></span>&nbsp +33 6 24 51 65 45<br><br><br>
-						// 	</p>
-						// 	<p align="right"><img id="pikevent" src="jimmy.jpg" width="148" height="148" ></p>
-							
-						// </div>
 
 						$Connexion = new mysqli( 'localhost' , "root" , "" , "ecemplois" ) ;
 						if ($Connexion->connect_error)echo "Erreur lors de la connexion à la base de donnée" ;
 						if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
 
 						$sql = "SELECT * FROM utilisateur 
-							        		JOIN etrecontactpro 
-							        		WHERE (('$numero_utilisateur' = etrecontactpro.numero_utilisateur1 OR '$numero_utilisateur' = etrecontactpro.numero_utilisateur2) 
-							        		AND (utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur1 OR utilisateur.numero_utilisateur = etrecontactpro.numero_utilisateur2) )
+							        		JOIN etreamis 
+							        		WHERE (('$numero_utilisateur' = etreamis.numero_utilisateur1 OR '$numero_utilisateur' = etreamis.numero_utilisateur2) 
+							        		AND (utilisateur.numero_utilisateur = etreamis.numero_utilisateur1 OR utilisateur.numero_utilisateur = etreamis.numero_utilisateur2) )
 							        		GROUP BY utilisateur.numero_utilisateur";
 				        $selection = mysqli_query($Connexion,$sql);
 

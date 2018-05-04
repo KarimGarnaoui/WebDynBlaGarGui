@@ -106,6 +106,7 @@
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li class="active"><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
@@ -145,26 +146,35 @@
 
 			    <div id="emploisPan" class="container-fluid">
 			    	<h4>Emplois</h4>
-			    	<div id="ajoutEmplois" class="container-fluid">
-			    		<h5>Ajouter un emplois</h5>
-			    		<form action="Traitement_Ajout_Emplois.php" method="post">
-			    			<table>
-			    				<tr>
-			    					<td id="creationEmplois">Profession : </td>
-			    					<td><input type="text" name="profession"></td>
-			    				</tr>
-			    				<tr>
-			    					<td id="creationEmplois">Diplome necessaire : </td>
-			    					<td><input type="text" name="diplome"></td>
-			    				</tr>
-			    				<tr>
-			    					<td id="creationEmplois">Description : </td>
-			    					<td><input type="text" name="description"></td>
-			    				</tr>
-			    			</table>
-			    			<input id="ajouter" type="submit" value="Ajouter">
-			    		</form>
-			    	</div>
+			    	<?php
+			    		$connexion= new mysqli('localhost','root','','ecemplois') ;
+						if($connexion->connect_error) echo "Erreur la connexion est refusée. " ;
+						if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+			    		if($statut=='Administrateur'){
+
+				    		echo"<div id='ajoutEmplois' class='container-fluid'>
+							    		<h5>Ajouter un emplois (Admin)</h5>
+							    		<form action='Traitement_Ajout_Emplois.php' method='post'>
+							    			<table>
+							    				<tr>
+							    					<td id='creationEmplois'>Profession : </td>
+							    					<td><input type='text' name='profession'></td>
+							    				</tr>
+							    				<tr>
+							    					<td id='creationEmplois'>Diplome necessaire : </td>
+							    					<td><input type='text' name='diplome'></td>
+							    				</tr>
+							    				<tr>
+							    					<td id='creationEmplois'>Description : </td>
+							    					<td><input type='text' name='description'></td>
+							    				</tr>
+							    			</table>
+							    			<input id='ajouter' type='submit' value='Ajouter'>
+							    		</form>
+							    	</div>" ;	
+			    		}
+				    	
+			    	?>
 			    	<div id="affichageEmplois" class="container-fluid">
 			    		<h5>Rechercher une offre d'emplois</h5>
 			    		
