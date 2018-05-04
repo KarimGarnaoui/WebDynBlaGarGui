@@ -21,8 +21,21 @@
 									$action = isset($_POST["action"])?$_POST["action"] : "";
 									if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
 									$image=$_FILES['image']['name'];
-									$lien="images/".$image;
-									$lien2=$_FILES['image']['tmp_name'];
+
+									echo"<br> <br> Imagee: $image <br> <br>";
+									if($image!="")
+									{
+										$lien="images/".$image;
+										$lien2=$_FILES['image']['tmp_name'];
+									}
+									else{
+										$lien="images/blanc.jpg";
+										$lien2="images/blanc.jpg";
+										$image="blanc.jpg";
+										echo"$lien";
+									}
+									
+
 									$date= date("Y-m-d");
 								    $heure=date("H:i:s");
 
@@ -44,6 +57,8 @@
 										echo "vamos";
 									}
 
+									echo"<br> Lien 22222222222222: $lien2 <br>";
+									$lien2=str_replace('\\','/',$lien2) ;
 									$sql = "INSERT INTO evenement (numero_evenement,descriptif_evenement,nom_evenement,statut, numero_utilisateur,action, date, heure) VALUES ('','$description_evenement','$titre','$acces','$numero_utilisateur','$action','$date','$heure')";
 
 								
@@ -59,24 +74,23 @@
 									while($data=mysqli_fetch_assoc($selection))
 									{
 										$numero_evenement=$data["last_id"];
-									}
-
+		
 									$numero_evenement=$numero_evenement-1;
 									setcookie('numero_evenement',$numero_evenement, 0);
 									setcookie('lien',$lien, 0);
 
-									if($image!="")
-									{
-									
+								
+																}
+
 										$description = isset($_POST["description"])?$_POST["description"] : "";
 										$sentiment = isset($_POST["humeur"])?$_POST["humeur"] : "";
 
 
 
-										
+									
 										if(isset($_COOKIE['numero_utilisateur']))
 										{										
-											while($erreur == 1) 
+											while($erreur == 1)
 											{
 												$sql2 = "INSERT INTO piece_jointe (lien,date,heure,description,sentiment) VALUES ('$lien','$date','$heure','$description','$sentiment')";
 
@@ -91,12 +105,14 @@
 												else
 												{
 													$compteur = $compteur+1 ;
-													$lien = "images/(".$compteur.")".$_FILES['image']['name'];
+													$lien = "images/(".$compteur.")".$image;
 													echo "<br>Nom image : $lien";
 												}
 											}
 													
 										}
+
+									
 																		
 									
 									
@@ -117,7 +133,7 @@
 										
 									}	
 
-									}
+									
 
 
 

@@ -91,6 +91,7 @@
 
 					[id*="pborder2"]
 					{
+						
 						border: 1px ;
 						border-radius: 5px ; 
 						width: 30% ;
@@ -100,7 +101,8 @@
 
 					[id*="pikevent"]
 					{
-						border: 1px black solid;
+						border:none;
+						border: 1px;
 						border-radius: 5px ; 
 						width: 150px; 
 						height: 150px;
@@ -190,8 +192,8 @@
  					 <ul class="nav navbar-nav">
 					  	<li class="active"><a href="Accueil.html">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
-					  	<li><a href="Notifications.html">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
-					  	<li><a href="Emplois.html">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
+					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
+					  	<li><a href="Emplois.phpl">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
@@ -296,7 +298,7 @@
 						if($db_found){
 							
 
-								$sql2 = "SELECT piece_jointe.lien, sentiment, evenement.date, evenement.heure, description, nom_evenement, descriptif_evenement,action FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien ";
+								$sql2 = "SELECT piece_jointe.lien, statut, sentiment, evenement.date, evenement.heure, description, nom_evenement, descriptif_evenement,action FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien ORDER BY evenement.date";
 
 
 
@@ -312,39 +314,50 @@
 									$action =$data2['action'];
 									$nom_evenement =$data2['nom_evenement'];
 									$descriptif_evenement =$data2['descriptif_evenement'];
+									$statut =$data2['statut'];
+									
+					
 
 							
-
+							echo"<form action='Traitement_Partager.php' method='post'>";
 
 							echo "<div id='resolvpb' class='container-fluid'> ";
 							echo"<div id = 'event1' class='container-fluid'>";
-							echo"<h4> $nom_evenement </h4>";
+							echo"<input type='hidden' name='nom_evenement' value='$nom_evenement'> <h4> $nom_evenement </h4>";
 							echo"<p id='pborder'>";
-							echo"<i>$sentiment en train de $action </i><br> <br>";
-							echo"$descriptif_evenement <br>";
+							if($lien!="")
+							{
+							echo"<input type='hidden' name='humeur' value='$sentiment'> <i>$sentiment en train de $action </i><br> <br>";
+							echo"<input type='hidden' name='action' value='$action'> ";
+							echo"<input type='hidden' name='statut' value='$statut'> ";
+							
+						}	
+							echo"<input type='hidden' name='descriptif_evenement' value='$descriptif_evenement'> $descriptif_evenement <br>";
 							echo"</p>";
 							if($lien!="")
 							{
-							echo"<p align='center' id='image'> <a href=$lien> <img id='pikevent' src=$lien width='148' height='148' > </a></p>";
+							echo"<input type='hidden'  name='lien' value='$lien'> <p align='center' id='image'> <a href=$lien> <img id='pikevent' src=$lien width='148' height='148' > </a></p>";
 							echo"<p id='pborder2'>";
-							echo"$description";
+							echo"<input type='hidden' name='description' value='$description'> $description";
 							echo"</p><br><br>";
 							}
 							
 							echo"<br> <br>";
 							echo"<footer>";
 							echo"<small>";
-							echo" <i><p id='foot'>Publication de : $prenom $nom ";
+							echo" <input type='hidden' name='nom' value=' $prenom $nom'> <i><p id='foot'>Publication de : $prenom $nom ";
 							echo"le $date à $heure heure </i>";
 						    
 						    echo"&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp";
-						    echo"<a href='Aimer.php'><span class='glyphicon glyphicon-thumbs-up'></span> J aime &nbsp&nbsp&nbsp&nbsp<a href='Partager.php'><span class='glyphicon glyphicon-share'></span> Partager </a></p>";
+						    echo"<span class='glyphicon glyphicon-thumbs-up'></span>  <input type='submit'href='Aimer.php' value='J aime'> &nbsp&nbsp&nbsp&nbsp 
+						    	<span class='glyphicon glyphicon-share'></span>  <input type='submit' href='Partager.php' value='Partager'></p>";
 							
 							echo"</small>";
 							echo"</footer>";
 						    echo"</div>";
 						    echo"</div>";
 						    echo"<br> <br>";
+						    echo"</form>";
 						
 					}
 				}
