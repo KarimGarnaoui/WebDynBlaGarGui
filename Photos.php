@@ -81,6 +81,14 @@
 			 
 		</head>
 		<body>
+            <?php 
+            $numero_utilisateur = $_COOKIE['numero_utilisateur'];
+            $albumUserAdd='albums/'.$numero_utilisateur.'/';
+            $dossierUser = $albumUserAdd;
+            if(!is_dir($dossierUser)){
+            mkdir($dossierUser);
+        }
+            ?>
 			<div class="container">
 				
 				<!-- Onglets + barre de recherche  -->
@@ -104,6 +112,7 @@
 				<!-- Affichage informations profile  -->
 				<div id="principal" class="container-fluid">
 					<table id="profil" align="right">
+                        <tr><td colspan="2"><center><p>Utilisateur connecté</p></center></td></tr>
 						<tr>
                             
 					    		<?php 
