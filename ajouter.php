@@ -15,7 +15,9 @@ $image=$_FILES['imageajouter']['name'];
 $link="images/".$image;
 $link2=$_FILES['imageajouter']['tmp_name'];
 
-$sql="INSERT INTO piece_jointe (lien, descripion, sentiment, date, heure) VALUES ('$link', '', '', '', '')"; 
+//première requete qui permet d'insérer l'image choisie dans la table piece_jointe de la bdd
+$sql="INSERT INTO piece_jointe (lien) VALUES ('$link')"; 
+echo "<br> SQL  : $sql";
 
 if(mysqli_query($db_handle, $sql)){
   echo "$link" ;
@@ -32,11 +34,12 @@ file_put_contents($file, $current);
 else {
     echo"error";
      }
-
-$sql2="INSERT INTO accessibilite (numero_utilisateur,lien, pdp) VALUES ('$numero_user','$link','')";
+//deuxième requete qui permet d'insérer l'image choisie dans la table accessibilite de la bdd
+$sql2="INSERT INTO accessibilite (numero_utilisateur,lien) VALUES ('$numero_user','$link')";
+echo "<br> SQL 2 : $sql2";
 
 if(mysqli_query($db_handle, $sql2)){
-    echo "yh";
+   
 }
 else{
     echo "nop";

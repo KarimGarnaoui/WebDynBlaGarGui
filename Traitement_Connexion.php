@@ -1,14 +1,19 @@
 <?php
+
+	//Recuperation du login, et pseudo rentré
 	$login = isset($_POST["Login"])?$_POST["Login"] : ""; 
 	$pseudo = isset($_POST["pseudo"])?$_POST["pseudo"] : ""; 
 
+	//Conexion a la bdd
 	$database = "ecemplois";
  	$db_handle = mysqli_connect('localhost', 'root',''); 
 	$db_found = mysqli_select_db($db_handle, $database);
 
-
+	//initialisation des variables
 	$erreur = "";
 	$connexion =false;
+
+	//Verification que le formùulaire est fonctionnel: aucun champs vides
 
 	if($login == ""){
 
@@ -30,14 +35,15 @@
 	}
 
 
-
+//Si la bdd est trouvee
 if($db_found){
+
+
+	//Remplir un array de tous les pseudo et email des inscrits
 	$sql1 = "SELECT email, pseudo FROM utilisateur";
-	//$sql2= "SELECT pseudo FROM utilisateur";
-
+	
 	$selection= mysqli_query($db_handle, $sql1);
-	//$pseudoregi = mysqli_query($db_handle, $sql2);
-
+	
 	$log=array();
 
 	while($data=mysqli_fetch_assoc($selection)){
@@ -69,7 +75,7 @@ if($db_found){
 		
 
 
-//$log = array($emailregi=> $pseudoregi);
+///Verifie si ils sont dans la bdd
 	for($i=0;$i<count($log);$i++)
 	{
 		if( $log[$login]==$pseudo)

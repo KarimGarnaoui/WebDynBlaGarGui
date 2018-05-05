@@ -9,7 +9,7 @@
 			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			 <style type="text/css">
-			      [id*="principal"] 
+			      [id*="principal"] /*Mise en page du composant */
 			      	{ 
 			      		
 			      		background-color: rgb(30, 30, 30) ;
@@ -19,7 +19,7 @@
 			      		color: white ;
 			      		padding: 20px ; 
 			      	}
-			      	[id*="photoProfil"] 
+			      	[id*="photoProfil"] /*Mise en page du composant */
 			      	{ 
 			      		margin-top: 20px ;  
 			      		margin-bottom: : 20px ;
@@ -34,7 +34,7 @@
 			      		float: left;
 			      	}
 			      	
-			      	[id*="infosProfil"] 
+			      	[id*="infosProfil"] /*Mise en page du composant */
 			      	{ 
 			      		margin-top: 20px ;  
 			      		margin-bottom: : 20px ;
@@ -48,7 +48,7 @@
 			      		position: absolute;
 			      		
 			      	}
-			      	[id*="enregistrer"] 
+			      	[id*="enregistrer"] /*Mise en page du composant */
 			      	{ 
 			      		position:absolute; 
 			      		bottom:15px;
@@ -57,13 +57,13 @@
 
 			      	}
 			      	
-			      	[id*="droite"] 
+			      	[id*="droite"] /*Mise en page du composant */
 			      	{  
 			      		width: 800px; 
 			      		height: 540px ; 
 			      		float: left ; 
 			      	}
-			      	[id*="champ"]{
+			      	[id*="champ"]{/*Mise en page du composant */
 			      		color: black ; 
 			      		margin : 10px;
 			      	}
@@ -87,12 +87,12 @@
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
-						        <input type="text" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-				     </form>
+                    <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+                    <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+             </form>
 					</div>
 				</div>
-
+				<!-- Affichage utilisateur a ajouter  -->
 				<div id="principal" class = "container-fluid">
 
 					<p>Profil</p> 

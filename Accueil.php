@@ -9,7 +9,8 @@
 			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			 <style type="text/css">
-			      [id*="principal"] 
+
+			      [id*="principal"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
@@ -20,7 +21,7 @@
 			      		width: 20%;
 			      		float : right;
 			      	}
-			      	[id*="evenement"] 
+			      	[id*="evenement"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 20px;
 			      		padding-left: 20px;
@@ -33,7 +34,7 @@
 			      		float : left;
 
 			      	}
-			      	[id*="event1"] 
+			      	[id*="event1"] /*Mise en page du composant */
 			      	{ 
 
 			      		padding-right: 20px;
@@ -46,7 +47,7 @@
 
 
 			      	}
-			      	[id*="resolvpb"] 
+			      	[id*="resolvpb"] /*Mise en page du composant */
 			      	{ 
 
 			      		padding-right: 20px;
@@ -59,7 +60,7 @@
 
 			      	}
 
-			      		[id*="publier"] 
+			      		[id*="publier"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 20px;
 			      		padding-left: 20px;
@@ -76,11 +77,11 @@
 
 			      	}
 
-			      	h4 
+			      	h4 /*Mise en page du composant */
 			      	{
 					    font-weight: bold;
 					}
-					[id*="pborder"]
+					[id*="pborder"] /*Mise en page du composant */
 					{
 						border: 1px black solid;
 						border-radius: 5px ; 
@@ -88,7 +89,7 @@
 						float:left;
 					}
 
-					[id*="pborder2"]
+					[id*="pborder2"]/*Mise en page du composant */
 					{
 						
 						border: 1px ;
@@ -98,7 +99,7 @@
 						float: right;
 					}
 
-					[id*="pikevent"]
+					[id*="pikevent"]/*Mise en page du composant */
 					{
 						border:none;
 						border: 1px;
@@ -108,19 +109,19 @@
 
 					}
 
-					[id*="titre"]
+					[id*="titre"]/*Mise en page du composant */
 					{
 						margin-right: 200px;
 					}
 
-					[id*="page"]
+					[id*="page"]/*Mise en page du composant */
 					{
 						margin-top: 10px;
 						width:400px;
 						height:50px;
 					}
 					
-					[id*="pagebis"]
+					[id*="pagebis"]/*Mise en page du composant */
 					{
 						margin-top: 10px;
 						width:250px;
@@ -129,14 +130,14 @@
 
 					}
 
-					[id*="page2"]
+					[id*="page2"]/*Mise en page du composant */
 					{
 						margin-top: 10px;
 						width:400px;
 						height:50px;
 					}
 
-					[id*="page3"]
+					[id*="page3"]/*Mise en page du composant */
 					{
 						margin-top: 10px;
 						width:200px;
@@ -147,19 +148,19 @@
 			
 					
 
-					[id*="dive"]
+					[id*="dive"]/*Mise en page du composant */
 					{
 						display: inline;
 					
 
 					}
-					[id*="dive"]
+					[id*="dive"]/*Mise en page du composant */
 					{
 						display: inline;
 						margin-right: right;
 					}
 
-					[id*="foot"]
+					[id*="foot"]/*Mise en page du composant */
 					{
 						position:relative;	
 						bottom:0;
@@ -167,24 +168,23 @@
 						font-size:1em;
 					}
 
-					[id*="itali"]
+					[id*="itali"]/*Mise en page du composant */
 					{
 						font-style: italic;
 
 
 					}
 
-					[id*="supr"]
+					[id*="supr"]/*Mise en page du composant */
 					{
 						float:right;
 						margin-right: 40px;
-
-
 					}
-					button{
-						width:60px;
-						height: 20px;
+					[id*='suppri']/*Mise en page du composant */
+					{
+						color: red ; 
 					}
+					
 
 					
     		</style>
@@ -199,8 +199,9 @@
  					 <ul class="nav navbar-nav">
 					  	<li class="active"><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
-					  	<li><a href="Emplois.phpl">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
+					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
                          <li><a href="Videos.php">Vidéos <span class="glyphicon glyphicon-film"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
@@ -229,8 +230,12 @@
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
 					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
-					    	</td>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> 
+					    		<?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>					    	
+              </td>
 					    </tr>
 					    
 					</table>
@@ -277,6 +282,8 @@
                   </form>
                   </div>
                  <div class="container-fluid">
+
+                 	<!-- PHP qui cree des evenement de maniere interactive  -->
                  <?php 
 
                   		$database = "ecemplois";
@@ -303,10 +310,10 @@
 
 						if($db_found){
 							 
-
+							// Requete qui trie les recepteurs de l'evenement suivant si il a achoisi de le partager avec tout le monde, les amis ou  le reseau
 							
-								$sql2 = "SELECT * FROM evenement JOIN piece_jointe JOIN contenir JOIN etreamis JOIN etrecontactpro
-    									 WHERE         ((((   ( (etreamis.numero_utilisateur1 = evenement.numero_utilisateur) AND (etreamis.numero_utilisateur2 = '$numero_utilisateur') ) 
+								$sql2 = "SELECT piece_jointe.lien, statut, sentiment, evenement.Date, evenement.Heure, description, nom_evenement, descriptif_evenement,action, evenement.numero_evenement FROM contenir JOIN evenement on evenement.numero_evenement=contenir.numero_evenement JOIN piece_jointe on contenir.lien=piece_jointe.lien JOIN etreamis JOIN etrecontactpro 
+										 WHERE         ((((   ( (etreamis.numero_utilisateur1 = evenement.numero_utilisateur) AND (etreamis.numero_utilisateur2 = '$numero_utilisateur') ) 
     									                    OR( (etreamis.numero_utilisateur2 = evenement.numero_utilisateur) AND (etreamis.numero_utilisateur1 = '$numero_utilisateur') )) OR (evenement.numero_utilisateur='$numero_utilisateur')))
     									                    AND ( ( (evenement.statut = 'amis') OR (evenement.numero_utilisateur='$numero_utilisateur') )
     									                       OR ( (evenement.statut = 'tous') OR (evenement.numero_utilisateur='$numero_utilisateur')))) 
@@ -317,9 +324,8 @@
     									                    OR (evenement.numero_utilisateur='$numero_utilisateur')))AND (  ( (evenement.statut = 'reseau') 
     									                    OR (evenement.numero_utilisateur='$numero_utilisateur') )OR ( (evenement.statut = 'tous') 
     									                    OR (evenement.numero_utilisateur='$numero_utilisateur')))
-										GROUP BY evenement.numero_evenement";
-
-
+										GROUP BY evenement.numero_evenement
+										ORDER BY evenement.heure DESC";
 
 								$selection2= mysqli_query($db_handle, $sql2);
 
@@ -335,11 +341,13 @@
 									$descriptif_evenement =$data2['descriptif_evenement'];
 									$statut =$data2['statut'];
 									$numero_evenement =$data2['numero_evenement'];
-							
+
+
+									//Affichage de l'evenement généré automatiquement avec mise en page en css
 
 
 							echo"<form action='Traitement_supprimer.php' method='post'>";
-							echo"<p colspan='2' align='right' id='supr'><input type='submit' name='Supprimer' value='Supprimer'> </p> <br>";
+							echo"<p colspan='2' align='right' id='supr'><input type='submit' id='suppri' name='Supprimer' value='Supprimer'> </p> <br>";
 							echo"<input type='hidden' name='numero_evenement' value='$numero_evenement'> ";
 							echo"</form>";
 
@@ -348,7 +356,7 @@
 							echo"<div id = 'event1' class='container-fluid'>";
 							echo"<input type='hidden' name='nom_evenement' value='$nom_evenement'> <h4> $nom_evenement </h4>";
 							echo"<p id='pborder'>";
-							if($lien!="")
+							if($action!="") // Si la personne ne precise pas ce qu'elle fait ne pas afficher cette partie
 							{
 							echo"<input type='hidden' name='humeur' value='$sentiment'> <i>$sentiment en train de $action </i><br> <br>";
 							echo"<input type='hidden' name='action' value='$action'> ";
@@ -357,7 +365,7 @@
 						}	
 							echo"<input type='hidden' name='descriptif_evenement' value='$descriptif_evenement'> $descriptif_evenement <br>";
 							echo"</p>";
-							if($lien!="")
+							if($lien!="") // ne pas afficher si il y a pas d'image
 							{
 							echo"<input type='hidden'  name='lien' value='$lien'> <p align='center' id='image'> <a href=$lien> <img id='pikevent' src=$lien width='148' height='148' > </a></p>";
 							echo"<p id='pborder2'>";

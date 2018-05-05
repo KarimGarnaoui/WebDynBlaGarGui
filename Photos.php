@@ -10,7 +10,7 @@
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			 <style type="text/css">
                  
-			      [id*="principal"] 
+			      [id*="principal"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
@@ -22,7 +22,7 @@
 			      		width: 20%;
 			      		float : right;
 			      	}
-			      	[id*="photograph"]
+			      	[id*="photograph"]/*Mise en page du composant */
                      {
 			      		width: 40%;
                         float : left;
@@ -33,7 +33,7 @@
                         
                      }
                  
-                    [id*="albumsaff"]
+                    [id*="albumsaff"]/*Mise en page du composant */
                      {
 			      		width: 40%;
                         float : left;
@@ -46,12 +46,12 @@
                         
                      }
 			     
-			      	h4 
+			      	h4 /*Mise en page du composant */
 			      	{
 					    font-weight: bold;
 					}
                  
-					[id*="pborder"]
+					[id*="pborder"]/*Mise en page du composant */
 					{
 						border: 1px black solid;
 						border-radius: 5px ; 
@@ -59,19 +59,19 @@
 						float: left ; 
 					}	
                  
-                 [id*="album"]
+                 [id*="album"]/*Mise en page du composant */
                  {
                     text-align: center;
                     margin:10px;
                  }
                  
-                 [id*="photos"]
+                 [id*="photos"]/*Mise en page du composant */
                  {
                     text-align: center;
                     margin:10px;
                  }
                  
-                 [id*="imageadd"]
+                 [id*="imageadd"]/*Mise en page du composant */
                  {
                      margin-left: 40%;
                      
@@ -99,16 +99,17 @@
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+              <li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li class="active"><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
                         <li><a href="Videos.php">Vidéos <span class="glyphicon glyphicon-film"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
-				     <form class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-				     </form>
+				    <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
+                    <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+                    <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+             </form>
 					</div>
 				</div>
 
@@ -130,8 +131,12 @@
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
                             
-					    		<a href="Profil.html"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> 
+                  <?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>
 					    	</td>
 					    </tr>
 					    

@@ -19,6 +19,8 @@
 	$erreur = "";
 	$connexion =false;
 
+	//verification que les champs ne sont pas vides
+
 	if($prenom == ""){
 
 		$erreur .= "Le champ login employe est vide. <br>";
@@ -56,6 +58,7 @@ if($mail == ""){
 		echo "Erreur: <br> $erreur <br>"; 
 	}
 
+//verification que lma connexion a la bdd est fonctionnelle
 if($conni->connect_error){
 		echo "Erreur la connexion est refusée. ";
 		}
@@ -63,7 +66,10 @@ if($conni->connect_error){
 			echo "Vamos. ";
 		}
 
-	$sql = "INSERT INTO utilisateur (numero_utilisateur,nom,prenom,email,pseudo, diplome,tel) VALUES ('','$nom','$prenom','$mail','$pseudo', '$diplome','$tel')";
+		//creation d'un utilisateur dans la bdd 
+
+	$sql = "INSERT INTO utilisateur (nom,prenom,email,pseudo, diplome,tel) VALUES ('$nom','$prenom','$mail','$pseudo', '$diplome','$tel')";
+	echo "<br> SQL : $sql";
 	
 	if ($conni->query($sql) === TRUE) 
 		{ 
@@ -71,7 +77,6 @@ if($conni->connect_error){
 			header('Location: Connexion.html');
 
 		}
-
 		$conni->close();	
 
 ?>

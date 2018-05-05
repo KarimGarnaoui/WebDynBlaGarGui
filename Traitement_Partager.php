@@ -1,6 +1,6 @@
  <?php 
- 		
- 	   $image="";
+ 								//IOnitialisation des variables
+ 	  							$image="";
  								$titre="";
 					   			$description_evenement="";
 					   			$acces="";
@@ -16,7 +16,7 @@
 
 
 
-
+		// Recuperationn des donnees du formulaire
  		$nom_evenement= isset($_POST["nom_evenement"])?$_POST["nom_evenement"] : ""; 
  		
 		$description_evenement = isset($_POST["descriptif_evenement"])?$_POST["descriptif_evenement"] : ""; 
@@ -25,6 +25,8 @@
 		$description = isset($_POST["description"])?$_POST["description"] : "";
 		$action = isset($_POST["action"])?$_POST["action"] : "";
 		$acces = isset($_POST["statut"])?$_POST["statut"] : "";
+
+		//utimlise les cookies pour identifier l'utilisateur actuel
 
 		if(isset($_COOKIE['numero_utilisateur'])) $numero_utilisateur = $_COOKIE['numero_utilisateur'];
 		$date= date("Y-m-d");
@@ -41,7 +43,7 @@
 	
 
 						
-
+		//Connexion a la bdd
 		$loc="localhost";
 		$login="root";
 		$password="";
@@ -58,9 +60,9 @@
 			echo "vamos";
 			}
 
+			// Memees requetes que pour publier mais avec quelques modification pour partager
 
-
-			$sql = "INSERT INTO evenement (numero_evenement,descriptif_evenement,nom_evenement,statut, numero_utilisateur,action, date, heure) VALUES ('','$description_evenement','$nom_evenement','$acces','$numero_utilisateur','$action','$date','$heure')";
+			$sql = "INSERT INTO evenement (descriptif_evenement,nom_evenement,statut, numero_utilisateur,action, Date, Heure) VALUES ('$description_evenement','$nom_evenement','$acces','$numero_utilisateur','$action','$date','$heure')";
 
 								
 									if ($conni->query($sql) === TRUE) 
@@ -93,7 +95,7 @@
 										{										
 											while($erreur == 1)
 											{
-												$sql2 = "INSERT INTO piece_jointe (lien,date,heure,description,sentiment) VALUES ('$lien2','$date','$heure','$description','$sentiment')";
+												$sql2 = "INSERT INTO piece_jointe (lien,Date,Heure,description,sentiment) VALUES ('$lien2','$date','$heure','$description','$sentiment')";
 
 												if ($conni->query($sql2) === TRUE)
 												{
@@ -122,7 +124,7 @@
 										
 									}	
 
-									$sql5= "INSERT INTO accessibilite (numero_utilisateur,lien,pdp) VALUES ('$numero_utilisateur','$lien2','')";
+									$sql5= "INSERT INTO accessibilite (numero_utilisateur,lien) VALUES ('$numero_utilisateur','$lien2')";
 
 									if ($conni->query($sql5) === TRUE) 
 									{ 

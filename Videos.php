@@ -81,16 +81,17 @@
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
 					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+              <li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
                         <li class="active"><a href="Videos.php">Vidéos <span class="glyphicon glyphicon-film"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
-				     <form class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-				     </form>
+				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
+                    <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+                    <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+             </form>
 					</div>
 				</div>
 
@@ -113,7 +114,11 @@
 					    		?> 
                             
 					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br>
+                    <?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>
 					    	</td>
 					    </tr>
 					    
@@ -133,7 +138,7 @@
                </div>  
                 
                 <?php
-                            
+                                        //parcours tous les fichiers et affiche les videos dans un div propre à chacune avec le nom de la video en titre 
                                         $numero_user2 = $_COOKIE['numero_utilisateur'];
                                         $iterator = new DirectoryIterator('videos/');
                                         $document = "";   
@@ -194,7 +199,7 @@
    
                                     ?>
                 </div>
-                
+                      <!--explorateur de fichier qui permet de choisir la video à upload-->
                         <div class="container" id="ajouterunevideo">
                                     <br>Ajouter une vidéo: <br>
                                     <form action="newVideo.php" method="post" enctype="multipart/form-data">

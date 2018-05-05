@@ -84,9 +84,9 @@
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" name="recherche" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-				     </form>
+                    <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+                    <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+             </form>
 					</div>
 				</div>
 
@@ -107,7 +107,11 @@
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
 					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> 
+					    			<?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>
 					    	</td>
 					    </tr>
 					    
@@ -120,15 +124,7 @@
 			    <div id="monreseau" class="container-fluid">
 					<h3>Contacts</h3><br><br><br>
 					<?php 
-						// <div id = "contact" class="container-fluid">
-						// 	<h4>Jimmy Neutron<br></h4>
-						// 	<p id="pborder">
-						// 		<span class="glyphicon glyphicon-comment"></span>&nbsp  jneutron@mail.com <br>
-						// 		<span class="glyphicon glyphicon-phone"></span>&nbsp +33 6 24 51 65 45<br><br><br>
-						// 	</p>
-						// 	<p align="right"><img id="pikevent" src="jimmy.jpg" width="148" height="148" ></p>
-							
-						// </div>
+						
 
 						$Connexion = new mysqli( 'localhost' , "root" , "" , "ecemplois" ) ;
 						if ($Connexion->connect_error)echo "Erreur lors de la connexion à la base de donnée" ;

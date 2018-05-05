@@ -9,7 +9,7 @@
 			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			 <style type="text/css">
-			      [id*="principal"] 
+			      [id*="principal"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
@@ -20,7 +20,7 @@
 			      		width: 20%;
 			      		float : right;
 			      	}
-			      	[id*="monreseau"] 
+			      	[id*="monreseau"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 20px;
 			      		padding-left: 20px;
@@ -34,7 +34,7 @@
 			      		float : left;
 
 			      	}
-			      	[id*="contact"] 
+			      	[id*="contact"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 20px;
 			      		padding-left: 20px;
@@ -48,16 +48,16 @@
 			      		margin-bottom: 20px;
 
 			      	}
-			      	h4 
+			      	h4 /*Mise en page du composant */
 			      	{
 					    font-weight: bold;
 					}
-					[id*="pborder"]
+					[id*="pborder"]/*Mise en page du composant */
 					{
 						width: 70% ; 
 						float: left ; 
 					}
-					[id*="pikevent"]
+					[id*="pikevent"]/*Mise en page du composant */
 					{
 						border: 1px black solid;
 						border-radius: 5px ; 
@@ -80,13 +80,14 @@
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
+					  	<li><a href="Videos.php">Vidéos <span class="glyphicon glyphicon-film"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" name="recherche" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-				     </form>
+                    <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+                    <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+             </form>
 					</div>
 				</div>
 
@@ -107,7 +108,11 @@
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
 					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> 
+					    			<?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>
 					    	</td>
 					    </tr>
 					    

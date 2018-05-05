@@ -1,5 +1,6 @@
 <?php 
-              
+         
+//permet d'ajouter une video dans le dossier propre à l'utilisateur dans le dossier video               
 $résultat="";
 
 $video=$_FILES['a']['name'];

@@ -109,11 +109,12 @@
 					<div class="container-fluid">
  					 <ul class="nav navbar-nav">
 					  	<li><a href="Accueil.php">Accueil <span class="glyphicon glyphicon-home"></span></a></li>
-					  	<li><a href="MonReseau.html">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
+					  	<li><a href="MonReseau.php">Mon Réseau <span class="glyphicon glyphicon-globe"></span></a></li>
 					  	<li><a href="MesAmis.php">Mes Amis <span class="glyphicon glyphicon-user"></span></a></li>
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
+					  	<li><a href="Videos.php">Vidéos <span class="glyphicon glyphicon-film"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
@@ -140,7 +141,11 @@
 									echo "<td> $prenom <br> $nom <br>" ;
 					    		?> 
 					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> 
+					    			<?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>
 					    	</td>
 					    </tr>
 					    
@@ -172,27 +177,30 @@
 					        	echo "<h4>".$donnees['prenom']." ".$donnees['nom'] ."<br></h4>" ; 
 					        	echo "<div id='pborder' class='container-fluid'>" ; 
 					        		
-					        		// echo "</p>" ;
+					        	
 					        		echo "<form action='Traitement_Ajout_Amis_Potentiellement' method='post'>"; 
 					        		echo "<span class='glyphicon glyphicon-comment'></span>&nbsp  ".$donnees['email']."<br>" ; 
 					        		echo "<span class='glyphicon glyphicon-phone'></span>&nbsp ".$donnees['tel']."<br>" ;
-					        			// echo "<p>";
+					        		
 						        		echo "<input type='submit' value='+Amis' id='notif' class='bouton_submit'> <br>" ; 
 						        		echo "<input type='hidden' value=".$donnees['numero_utilisateur']." name='numero_recepteur'>" ; 
-						        		// echo "</p>" ;
+						        		
 					        		echo "</form>";
 					        		echo "<form action='Traitement_Ajout_Contact_Pro_Potentiellement' method='post'>";
-					        			// echo "<p>";
+					        			
 						        		echo "<input type='submit' value='+Contact pro' id='notif' class='bouton_submit'>" ; 
 						        		echo "<input type='hidden' value=".$donnees['numero_utilisateur']." name='numero_recepteur'>" ;
-						        		// echo "</p>" ;
+						        		
 					        		echo "</form>";
+					        		if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+					        		if($statut=='Administrateur'){
 					        		echo "<form action='Traitement_Supprimer_Utilisateur.php' method='post'>";
-					        			// echo "<p>";
+					        			
 						        		echo "<input type='submit' value='-Supprimer l utilisateur' id='notif2' class='bouton_submit'>" ; 
 						        		echo "<input type='hidden' value=".$donnees['numero_utilisateur']." name='numero_recepteur'>" ;
-						        		// echo "</p>" ;
+						        		
 					        		echo "</form>";
+					        	}
 					        		echo "</div>";
 					        	
 					        	$num_user_actuel = $donnees['numero_utilisateur'] ; 

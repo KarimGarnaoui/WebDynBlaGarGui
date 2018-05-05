@@ -1,5 +1,6 @@
 <?php 
-              
+           
+//permet d'ajouter une image dans le fichier propre à l'utilisateur               
 $résultat="";
 
 $nomalbum=isset($_POST["nomalbum"])? $_POST["nomalbum"] : "";

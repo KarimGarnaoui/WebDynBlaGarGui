@@ -137,8 +137,8 @@
 					  	<li class="active"><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" name="recherche" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+						        <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+						        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
 				     </form>
 					</div>
 				</div>
@@ -161,7 +161,11 @@
 
 					    		?> 
 					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> 
+					    			<?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>
 					    	</td>
 					    </tr>
 					    
@@ -241,7 +245,8 @@
 							        if(isset($_COOKIE['destinataire'])){
 
 							         $user_2 = $_COOKIE['destinataire'];
-							         $sql = "SELECT * FROM message WHERE ((user_1 = $numero_utilisateur AND user_2 = $user_2) OR (user_2 = $numero_utilisateur AND user_1 = $user_2)) ORDER BY heure DESC LIMIT 0, 10" ;
+							         $sql = "SELECT * FROM message WHERE ((user_1 = $numero_utilisateur AND user_2 = $user_2) OR (user_2 = $numero_utilisateur AND user_1 = $user_2)) ORDER BY date DESC LIMIT 0, 10" ;
+							         
 							         $selection = mysqli_query($Connexion,$sql);
 
 							        while($donnees =  mysqli_fetch_assoc($selection)){

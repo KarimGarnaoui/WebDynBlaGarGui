@@ -9,7 +9,7 @@
 			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			 <style type="text/css">
-			      [id*="principal"] 
+			      [id*="principal"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
@@ -21,7 +21,7 @@
 			      		float : right;
 			      	}
 
-			      	[id*="emploisPan"] 
+			      	[id*="emploisPan"] /*Mise en page du composant */
 			      	{ 
 			      		padding-right: 10px;
 			      		padding-left: 10px;
@@ -32,7 +32,7 @@
 			      		width: 78%;
 			      		float : left;
 			      	}
-			      	[id*="ajoutEmplois"] 
+			      	[id*="ajoutEmplois"] /*Mise en page du composant */
 			      	{ 
 			      		padding-left  : 10px;
 			      		margin : 10px;
@@ -44,7 +44,7 @@
 			      		height: 150px;
 			      		width: 80%;
 			      	}
-			      	[id*="affichageEmplois"] 
+			      	[id*="affichageEmplois"] /*Mise en page du composant */
 			      	{ 
 			      		padding-left : 10px;
 			      		margin : 10px;
@@ -56,13 +56,13 @@
 			      		font-weight:bold;
 			      		width: 80% ; 
 			      	}
-			      	[id*="ajouter"] 
+			      	[id*="ajouter"] /*Mise en page du composant */
 			      	{ 
 			      		position: relative;
 			      		float: right;
 			      		bottom: 20px;
 			      	}
-			      	[id*="liste"] 
+			      	[id*="liste"] /*Mise en page du composant */
 			      	{ 
 			      		padding:10px;
 			      		margin: 10px ; 
@@ -74,21 +74,21 @@
 			      		float : left;
 			      	}
 
-			      	h4{
+			      	h4{ /*Mise en page du composant */
 			      		color: white ;
 			      		margin: 20px;
 			      	}
-			      	h5{
+			      	h5{ /*Mise en page du composant */
 			      		color: white ; 
 			      	}
-			      	td[id=creationEmplois]{
+			      	td[id=creationEmplois]{ /*Mise en page du composant */
 			      		color: white ; 
 			      		padding-left: 20px ; 
 			      		padding-right: 20px ; 
 			      		padding-top: 8px;
 			      		padding-bottom: 8px ; 
 			      	}
-			      	p[id=espace]
+			      	p[id=espace] /*Mise en page du composant */
 			      	{
 			      		color: black ; 
 			      		font-weight: normal ;
@@ -110,16 +110,17 @@
 					  	<li><a href="Notifications.php">Notifications <span class="glyphicon glyphicon-exclamation-sign"></span> </a></li>
 					  	<li class="active"><a href="Emplois.php">Emplois <span class="glyphicon glyphicon-briefcase"></span></a></li>
 					  	<li><a href="Photos.php">Photos <span class="glyphicon glyphicon-picture"></span></a></li>
+					  	<li><a href="Videos.php">Vidéos <span class="glyphicon glyphicon-film"></span></a></li>
 					  	<li><a href="Messagerie.php">Messagerie <span class="glyphicon glyphicon-comment"></span></a></li>
 				     </ul>
 				     <form action="Traitement_Recherche" method="post" class="navbar-form navbar-right">
-						        <input type="search" class="input-sm form-control" placeholder="Recherche">
-						        <button type="submit" name="recherche" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-				     </form>
+                    <input type="search" class="input-sm form-control" name="recherche" placeholder="Recherche">
+                    <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+             </form>
 					</div>
 				</div>
 
-				<!-- Affichage informations profile  -->
+				<!-- Affichage emplois  -->
 				<div id="principal" class="container-fluid">
 					<table id="profil" align="right">
 						<tr><td colspan="2"><center><p>Utilisateur connecté</p></center></td></tr>
@@ -137,7 +138,11 @@
 
 					    		?> 
 					    		<a href="Profil.php"><span class="glyphicon glyphicon-user"></span> Profil <br>
-					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> <br>
+					    		<a href="Connexion.html"><span class="glyphicon glyphicon-off"></span> Deconnexion <br> 
+					    			<?php
+                  if(isset($_COOKIE['statut'])) $statut = $_COOKIE['statut'];
+                  if($statut=='Administrateur') echo"<a href='Admin.php'><span class='glyphicon glyphicon-cog'></span> Admin";
+                  ?>
 					    	</td>
 					    </tr>
 					    

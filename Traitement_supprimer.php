@@ -1,13 +1,13 @@
  <?php
 $numero_evenement = isset($_POST["numero_evenement"])?$_POST["numero_evenement"] : ""; 
 
-
+									
+									//connexion a la bdd
 									$loc="localhost";
 									$login="root";
 									$password="";
 									$database="ecemplois";
-									//$numero_evenement=$numero_evenement-1;
-
+									
 
 									//Connexion a la base de donnee avec les identifiants et le login adéquats
 									$conni= new mysqli($loc,$login,$password,$database);
@@ -21,7 +21,7 @@ $numero_evenement = isset($_POST["numero_evenement"])?$_POST["numero_evenement"]
 									}
 
 
-
+//suprrime un evenement si on l'a demande dans le form de acceil.php
 
 $sql="DELETE FROM evenement where numero_evenement='$numero_evenement'";
 
@@ -33,7 +33,7 @@ if ($conni->query($sql) === TRUE)
 										
 									}
 
-
+									//appel de Accueil.php
 									header('Location: Accueil.php');
 
 
